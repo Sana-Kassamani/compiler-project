@@ -49,6 +49,11 @@ const monacoThemes = {
   idlefingers: "idleFingers",
   krtheme: "krTheme",
   monoindustrial: "monoindustrial",
+  dracula: "Dracula",
+  cobalt2: "Cobalt2",
+  "github-dark": "GitHub Dark",
+  "github-light": "GitHub Light",
+  nord: "Nord",
 };
 
 const defineTheme = (theme) => {
