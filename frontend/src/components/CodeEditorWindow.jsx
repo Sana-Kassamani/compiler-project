@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
+import LanguageSelector from "./LanguageSelector";
 
 const CodeEditorWindow = () => {
     const [value, setValue] = useState("");
     const editorRef = useRef();
+    const [language, setLanguage] = useState("javascript");
 
     // handle value
     const handleEditorChange = (value) => {
@@ -16,12 +18,18 @@ const CodeEditorWindow = () => {
         editor.focus();
     }
 
+    const onSelect = (language) => {
+        setLanguage(language);
+      };
+
     return (
         <div>
+            <LanguageSelector language={language} onSelect={onSelect}/>
             <Editor 
-                height="85vh"
+                height="70vh"
                 width={`100%`}
                 defaultLanguage="javascript"
+                language={language}
                 value={value}
                 theme="vs-dark"
                 defaultValue="// some comment"
