@@ -1,0 +1,83 @@
+.language-selector {
+    margin-left: 30px;
+    margin-bottom: 16px;
+}
+
+.language-text {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-size: 15px;
+    color: gray;
+}
+
+.menu-button {
+    padding: 8px 16px;
+    background-color: #110c1b;
+    color: #fff;
+    border: 1px solid #444;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+.menu-button:hover {
+    background-color: #444;
+    color: #1e90ff;
+}
+
+.menu-list {
+    height: 200px;
+    overflow-y: scroll;
+    background-color: #110c1b;
+    border-radius: 8px;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.menu-list::-webkit-scrollbar-track {
+    background-color: #110c1b;
+    border-radius: 8px;
+}
+
+.menu-list::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 8px;
+}
+
+.menu-list::-webkit-scrollbar-thumb:hover {
+    background-color: #1e90ff;
+}
+
+.menu-item {
+    padding: 8px 16px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-item:hover {
+    background-color: #444;
+    color: #1e90ff;
+}
+
+.menu-item.active {
+    background-color: #2d2d2d;
+    color: #1e90ff;
+}
+
+.version {
+    color: #b0b0b0;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.version:hover {
+    color: #1e90ff;
+}
