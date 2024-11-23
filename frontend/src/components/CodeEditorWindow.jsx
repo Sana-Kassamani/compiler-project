@@ -10,13 +10,16 @@ const CodeEditorWindow = () => {
 
     const handleEditorChange = (value) => {
         setValue(value);
+        console.log(value);
     };
 
+    // set focus on tthe compiler
     const onMount = (editor) => {
         editorRef.current = editor;
         editor.focus();
     };
 
+    // select language
     const onSelect = (language) => {
         setLanguage(language);
     };
@@ -30,7 +33,6 @@ const CodeEditorWindow = () => {
                 <div className="monaco-editor-container">
                     <Editor 
                         height="70vh"
-                        width="100%"
                         defaultLanguage="javascript"
                         language={language}
                         value={value}

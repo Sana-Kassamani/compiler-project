@@ -9,16 +9,17 @@ const LanguageSelector = ({ language, onSelect }) => {
         <p className="language-text">Language:</p>
         <Menu>
             <MenuButton className="menu-button">
-            {language}
+                {language}
             </MenuButton>
             <MenuList className="menu-list">
             {Object.entries(languageOptions).map(([lang, version]) => (
                 <MenuItem
-                key={lang}
-                className={`menu-item ${lang === language ? 'active' : ''}`}
-                onClick={() => onSelect(lang)}
+                    key={lang}
+                    className={`menu-item ${lang === language ? 'active' : ''}`}
+                    onClick={() => onSelect(lang)}
                 >
-                {lang} <span className="version">({version})</span>
+                    {lang} 
+                    <span className="version">({version})</span>
                 </MenuItem>
             ))}
             </MenuList>
