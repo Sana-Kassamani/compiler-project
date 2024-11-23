@@ -1,0 +1,22 @@
+.CodeEditorWindow {
+    margin-left: 300px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-top: 20px;
+  }
+  
+  .editor-container {
+    flex-grow: 1;
+  }
+  
+  .monaco-editor-container {
+    border-radius: 8px;
+    overflow: hidden;
+    width: 50%;
+    border: 1px solid white;
+    background-color: #1a202c;
+    border: 2px solid #444;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
