@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Invitation;
 
 class MailController extends Controller
-{
+{   
+    
     public function sendMail() {
-        Mail::to('arefahrm@gmail.com')->send(new Invitation());
+        $name = 'Aref';
+        Mail::to('arefahrm@gmail.com')->send(new Invitation($name));
     }
 }

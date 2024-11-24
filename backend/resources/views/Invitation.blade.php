@@ -1,1 +1,1 @@
-Invitation
+{{ $name }} sent you an invite
