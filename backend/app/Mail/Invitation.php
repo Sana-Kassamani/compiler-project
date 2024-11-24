@@ -37,7 +37,7 @@ class Invitation extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'Invitation',
+            markdown: 'Invitation',
         );
     }
 
