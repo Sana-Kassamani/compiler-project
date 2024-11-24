@@ -1,0 +1,51 @@
+.output-container{
+  height: 65vh;
+  margin-top: 20px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.output-container p{
+  margin-bottom: 40px;
+  font-size: 18px;
+  color: gray;
+}
+
+.output-box{
+  background-color: white;
+  box-shadow: -6px 0px 6px rgba(255, 255, 255, 0.5);
+  height: 40vh;
+  padding: 15px;
+  width: 400px;
+  border-radius: 5px;
+}
+
+.output-box.error-output {
+  background-color: #fdecea;
+  color: #a94442;
+}
+
+.run-code-btn{
+  margin-top: 30px;
+  background-color: rgb(0, 143, 0);
+  color: #edf2f7;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-end;
+}
+
+.run-code-btn:hover {
+  background-color: rgb(0, 112, 0);
+}
+
+.run-code-btn:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}

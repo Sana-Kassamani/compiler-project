@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import executeCode from "../utils/executeCode";
+import "../styles/output.css"
 import { languageOptions } from "../constants/languageOptions";
 
 const Output = ({editorRef, language}) => {

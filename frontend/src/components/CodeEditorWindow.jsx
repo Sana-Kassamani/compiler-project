@@ -62,6 +62,7 @@ const CodeEditorWindow = () => {
 
     return (
         <div className="window">
+            <div className="files"></div>
             <div className="CodeEditorWindow">
                 <div className="selectors">
                     <div className="language-selector">
