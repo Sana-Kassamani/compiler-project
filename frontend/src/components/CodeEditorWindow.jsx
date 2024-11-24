@@ -4,6 +4,7 @@ import LanguageSelector from "./LanguageSelector";
 import '../styles/editor.css';
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
+import Output from "./Output";
 
 const CodeEditorWindow = () => {
     const [value, setValue] = useState("");
@@ -60,28 +61,33 @@ const CodeEditorWindow = () => {
     }, []);
 
     return (
-        <div className="CodeEditorWindow">
-            <div className="selectors">
-                <div className="language-selector">
-                    <LanguageSelector language={language} onSelect={onSelect} />
+        <div className="window">
+            <div className="CodeEditorWindow">
+                <div className="selectors">
+                    <div className="language-selector">
+                        <LanguageSelector language={language} onSelect={onSelect} />
+                    </div>
+                    <div className="theme-selector">
+                        <ThemeSelector theme={theme} handleThemeChange={handleThemeChange} />
+                    </div>
                 </div>
-                <div className="theme-selector">
-                    <ThemeSelector theme={theme} handleThemeChange={handleThemeChange} />
+                <div className="editor-container">
+                    <div className="monaco-editor-container">
+                        <Editor 
+                            height="80vh"
+                            defaultLanguage="javascript"
+                            language={language}
+                            value={value}
+                            theme={theme.value}
+                            defaultValue="// some comment"
+                            onMount={onMount}
+                            onChange={handleEditorChange}
+                        />
+                    </div>
                 </div>
             </div>
-            <div className="editor-container">
-                <div className="monaco-editor-container">
-                    <Editor 
-                        height="80vh"
-                        defaultLanguage="javascript"
-                        language={language}
-                        value={value}
-                        theme={theme.value}
-                        defaultValue="// some comment"
-                        onMount={onMount}
-                        onChange={handleEditorChange}
-                    />
-                </div>
+            <div className="output-container">
+                <Output editorRef={editorRef} language={language}/>
             </div>
         </div>
     );
