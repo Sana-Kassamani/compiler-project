@@ -9,7 +9,7 @@ const CodeEditorWindow = () => {
     const [value, setValue] = useState("");
     const editorRef = useRef();
     const [language, setLanguage] = useState("javascript");
-    const [theme, setTheme] = useState("cobalt");
+    const [theme, setTheme] = useState({ value: "cobalt", label: "Cobalt" });
 
     // handle value in the editor
     const handleEditorChange = (value) => {
@@ -35,16 +35,28 @@ const CodeEditorWindow = () => {
         console.log(theme);
         if (["light", "vs-dark"].includes(theme.value)) {
             setTheme(theme);
+            localStorage.setItem("editorTheme", JSON.stringify(theme));
         } 
         else {
-            defineTheme(theme.value).then((_) => setTheme(theme));
+            defineTheme(theme.value).then((_) => {
+                setTheme(theme);
+                localStorage.setItem("editorTheme", JSON.stringify(theme));
+            })
         }
     }
 
     useEffect(() => {
-        defineTheme("cobalt").then((_) =>
-          setTheme({ value: "cobalt", label: "Cobalt" })
-        );
+        const savedTheme = localStorage.getItem("editorTheme");
+        if (savedTheme) {
+            const parsedTheme = JSON.parse(savedTheme);
+            setTheme(parsedTheme);
+            defineTheme(parsedTheme.value);
+        } 
+        else {
+            defineTheme("cobalt").then((_) =>
+                setTheme({ value: "cobalt", label: "Cobalt" })
+            );
+        }
     }, []);
 
     return (
