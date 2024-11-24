@@ -42,8 +42,8 @@ const CodeEditorWindow = () => {
     }
 
     useEffect(() => {
-        defineTheme("oceanic-next").then((_) =>
-          setTheme({ value: "oceanic-next", label: "Oceanic Next" })
+        defineTheme("cobalt").then((_) =>
+          setTheme({ value: "cobalt", label: "Cobalt" })
         );
     }, []);
 
@@ -54,13 +54,13 @@ const CodeEditorWindow = () => {
                     <LanguageSelector language={language} onSelect={onSelect} />
                 </div>
                 <div className="theme-selector">
-                    <ThemeSelector theme={theme} handleThemeChange={handleThemeChange}/>
+                    <ThemeSelector theme={theme} handleThemeChange={handleThemeChange} />
                 </div>
             </div>
             <div className="editor-container">
                 <div className="monaco-editor-container">
                     <Editor 
-                        height="70vh"
+                        height="80vh"
                         defaultLanguage="javascript"
                         language={language}
                         value={value}

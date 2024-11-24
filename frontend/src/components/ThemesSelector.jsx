@@ -1,19 +1,29 @@
 import React from "react";
+import { Menu, MenuButton, MenuList, MenuItem } from "@reach/menu-button";
 import monacoThemes from "monaco-themes/themes/themelist";
-import Select from "react-select";
+import '../styles/Selectors.css';
 
 const ThemeSelector = ({handleThemeChange, theme}) => {
     return(
-        <Select 
-            placeholder={`Select Theme`}
-            options={Object.entries(monacoThemes).map(([themeId, themeName]) => ({
-                label: themeName,
-                value: themeId,
-                key: themeId,
-            }))}
-            value={theme}
-            onChange={handleThemeChange}
-        />
+        <div className="selector">
+            <p className="text">Select Theme:</p>
+            <Menu>
+                <MenuButton className="menu-button">
+                    {theme?.label || "Select Theme"}
+                </MenuButton>
+                <MenuList className="menu-list">
+                    {Object.entries(monacoThemes).map(([themeId, themeName]) => (
+                    <MenuItem
+                        key={themeId}
+                        className={`menu-item ${theme?.value === themeId ? "active" : ""}`}
+                        onClick={() => handleThemeChange({ value: themeId, label: themeName })}
+                    >
+                        {themeName}
+                    </MenuItem>
+                    ))}
+                </MenuList>
+            </Menu>
+        </div>
     )
 };
 

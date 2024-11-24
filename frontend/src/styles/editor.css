@@ -1,26 +1,75 @@
+.selectors {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 16px;
+    padding: 0 16px;
+}
+
 .language-selector{
-    margin-left: 40px;
+    margin-left: 20px;
+}
+
+.theme-selector{
+    margin-right: 20px;
 }
 
 .CodeEditorWindow {
-    margin-left: 300px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     height: 100%;
     margin-top: 20px;
+    padding: 0 16px;
 }
 
 .editor-container {
     flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px; 
 }
 
 .monaco-editor-container {
     border-radius: 8px;
     overflow: hidden;
-    width: 50%;
-    border: 1px solid white;
-    background-color: #1a202c;
+    width: 100%;
     border: 2px solid #444;
+    background-color: #1a202c;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
-  
+
+@media (max-width: 768px) {
+    .selectors {
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .editor-container {
+        max-width: 100%; 
+    }
+
+    .monaco-editor-container {
+        height: 400px;
+    }
+}
+
+@media (max-width: 522px) {
+    .selectors {
+        flex-direction: column;
+        align-items: center; 
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .editor-container {
+        max-width: 100%; 
+    }
+
+    .monaco-editor-container {
+        height: 300px;
+    }
+}
