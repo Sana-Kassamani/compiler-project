@@ -9,7 +9,7 @@ const CodeEditorWindow = () => {
     const [value, setValue] = useState("");
     const editorRef = useRef();
     const [language, setLanguage] = useState("javascript");
-    const [theme, setTheme] = useState({ value: "cobalt", label: "Cobalt" });
+    const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
 
     // handle value in the editor
     const handleEditorChange = (value) => {
@@ -53,8 +53,8 @@ const CodeEditorWindow = () => {
             defineTheme(parsedTheme.value);
         } 
         else {
-            defineTheme("cobalt").then((_) =>
-                setTheme({ value: "cobalt", label: "Cobalt" })
+            defineTheme("active4d").then((_) =>
+                setTheme({ value: "active4d", label: "Active4D" })
             );
         }
     }, []);
