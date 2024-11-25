@@ -53,7 +53,7 @@ class FilesController extends Controller
             "file"=> $new_file
         ],200); 
     }
-    
+
    public function get_all_files(){
     $user = auth()->user();
     $user_files = File::where('owner_id', $user->id)->get();
@@ -68,4 +68,8 @@ class FilesController extends Controller
         "user_files"=> $user_files
     ],200);
    }
+
+   //save file ...edit
+   //delete file
+   // get one file
 }
