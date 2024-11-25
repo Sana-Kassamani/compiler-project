@@ -51,8 +51,21 @@ class FilesController extends Controller
         return response()->json([
             "message"=>"File created successfully",
             "file"=> $new_file
-        ],200);
-
-        
+        ],200); 
     }
+    
+   public function get_all_files(){
+    $user = auth()->user();
+    $user_files = File::where('owner_id', $user->id)->get();
+    if(!$user_files)
+    {
+        return response()->json([
+            "message"=>"No files available"
+        ],200); 
+    }
+    return response()->json([
+        "message"=>"Files retrieved successfully",
+        "user_files"=> $user_files
+    ],200);
+   }
 }
