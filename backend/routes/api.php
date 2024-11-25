@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\JWTAuthController;
+use App\Http\Controllers\Files\FilesController;
 use App\Http\Middleware\JWTMiddleware;
 
 Route::post('register', [JWTAuthController::class, 'register']);
@@ -13,6 +14,12 @@ Route::get('unauthorized', [JWTAuthController::class, 'unauthorized'])->name("un
 Route::middleware(JWTMiddleware::class)->group(function () {
     Route::get('user', [JWTAuthController::class, 'getUser']);
     Route::post('logout', [JWTAuthController::class, 'logout']);
+    Route::prefix("/file")->group(function() {
+        Route::post("/", [FilesController::class, "create_file"]);
+        // Route::post("/", [NewsController::class, "createNews"]);
+        // Route::put("/{id}", [NewsController::class, "editNews"]);
+        // Route::delete("/{id}", [NewsController::class, "deleteNews"]);
+      });
 });
 
 
