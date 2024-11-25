@@ -42,19 +42,15 @@ class JWTAuthController extends Controller
         $credentials = $request->only('email', 'password');
         echo json_encode($credentials);
         try {
-            echo "Im here at 50";
             
             if (! $token = JWTAuth::attempt($credentials)) {
-                echo "Im here at 52";
                 return response()->json(['error' => 'Invalid credentials'], 401);
             }
-            echo "Im here at 53";
             // Get the authenticated user.
             $user = auth()->user();
 
             // (optional) Attach the role to the token.
             // $token = JWTAuth::claims(['role' => $user->role])->fromUser($user);
-            echo "Im here at 59";
             $token = JWTAuth::fromUser($user);
 
             return response()->json(compact('token'));
@@ -65,7 +61,6 @@ class JWTAuthController extends Controller
 
     public function getUser()
     {
-        echo "I'm in getUser";
         try {
             if (! $user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['error' => 'User not found'], 404);
