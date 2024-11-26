@@ -37,6 +37,13 @@
   gap: 10px;
 }
 
+.files-title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 20px;
+}
+
 .file {
   display: flex;
   justify-content: space-between;
