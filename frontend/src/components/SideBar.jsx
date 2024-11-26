@@ -9,8 +9,22 @@ const SideBar = () => {
     <div className="side-bar">
       <div className="files">
         <h2>Files</h2>
-        <div className="file-description">
+        <div className="file-list">
+          <File type={Python} name={'App.py'} shared={true}/>
           <File type={Python} name={'App.py'}/>
+          <File type={Python} name={'App.py'}/>
+          <File type={Python} name={'App.py'}/>
+          <File type={Python} name={'App.py'} shared={true}/>
+          <File type={Python} name={'App.py'}/>
+          <File type={Python} name={'App.py'} shared={true}/>
+          <File type={Python} name={'App.py'}/>
+          <File type={Python} name={'App.py'} shared={true}/>
+          <File type={Python} name={'App.py'}/>
+          <File type={Python} name={'App.py'}/>
+          <File type={Python} name={'App.py'} shared={true}/>
+          <File type={Python} name={'App.py'}/>
+          <File type={Python} name={'App.py'}/>
+          <File type={Python} name={'App.py'} shared={true}/>
         </div>
       </div>
       <div className="contributors">
