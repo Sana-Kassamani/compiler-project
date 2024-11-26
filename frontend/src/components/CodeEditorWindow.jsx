@@ -17,7 +17,6 @@ const CodeEditorWindow = () => {
   // handle value in the editor
   const handleEditorChange = (value) => {
     setValue(value);
-    console.log(value);
   };
 
   // set focus on tthe compiler
@@ -83,7 +82,7 @@ const CodeEditorWindow = () => {
               handleThemeChange={handleThemeChange}
             />
           </div>
-          <button className="ai-button selector" onClick={console.log("Hello")}>
+          <button className="ai-button selector" onClick={()=>{console.log(value)}}>
             Analyze Code
           </button>
         </div>

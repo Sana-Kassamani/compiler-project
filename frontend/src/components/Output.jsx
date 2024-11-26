@@ -40,7 +40,7 @@ const Output = ({editorRef, language}) => {
                 }
             </div>
             <div className="output-buttons">
-                <button className='debug-button' onClick={console.log('Hello')}><img src={Bug} alt="Bug Icon"/>Debug</button>
+                <button className='debug-button' onClick={()=>{console.log('Hello')}}><img src={Bug} alt="Bug Icon"/>Debug</button>
                 <button
                     className="run-code-btn"
                     disabled={isloading}
