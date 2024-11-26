@@ -20,6 +20,7 @@
 
 .side-bar {
   height: 100vh;
+  max-width: 300px;
   background-color: #24292e;
   border-radius: 0 10px 10px 0;
   color: #fff;
@@ -56,9 +57,15 @@
   height: 30px;
 }
 
+.contributors{
+    overflow-y: auto;
+}
+
 .avatars {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+  overflow-y: none;
 }
 
 .avatars h2 {

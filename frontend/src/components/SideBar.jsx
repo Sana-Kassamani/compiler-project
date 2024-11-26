@@ -33,6 +33,8 @@ const SideBar = () => {
           <h2>A</h2>
           <h2>S</h2>
           <h2>F</h2>
+          <h2>A</h2>
+          
         </div>
       </div>
     </div>
