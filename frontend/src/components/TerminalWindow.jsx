@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Terminal } from 'xterm';
 import 'xterm/css/xterm.css';
 
-const TerminalWindow = () => {
+const TerminalWindow = () => { 
   useEffect(() => {
     const terminal = new Terminal();
     terminal.open(document.getElementById('terminal'));
