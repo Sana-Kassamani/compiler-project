@@ -74,9 +74,9 @@ const CodeEditorWindow = () => {
             <div className="files"></div>
             <div className="CodeEditorWindow">
                 <div className="selectors">
-                    <div className="language-selector">
+                    {/* <div className="language-selector">
                         <LanguageSelector language={language} onSelect={onSelect} />
-                    </div>
+                    </div> */}
                     <div className="theme-selector">
                         <ThemeSelector theme={theme} handleThemeChange={handleThemeChange} />
                     </div>

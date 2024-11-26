@@ -9,6 +9,10 @@
 }
 
 .menu-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     background-color: #2d3748;
     color: #edf2f7;
     padding: 10px 20px;
