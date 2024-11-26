@@ -55,6 +55,10 @@ const CodeEditorWindow = () => {
     });
   };
 
+  const handleLogout = () =>{
+    
+  }
+
   useEffect(() => {
     const savedTheme = localStorage.getItem("editorTheme");
     if (savedTheme) {
@@ -101,7 +105,7 @@ const CodeEditorWindow = () => {
 
       <div className="output-container">
         <div className="logout">
-          <button>Log Out</button>
+          <button onClick={handleLogout}>Log Out</button>
         </div>
         <Output editorRef={editorRef} language={language} />
       </div>

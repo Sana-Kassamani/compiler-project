@@ -40,6 +40,21 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+.logout{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logout button{
+    border: none;
+    background-color: #2D3748;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
 @media (max-width: 768px) {
     .selectors {
         gap: 12px;
