@@ -1,7 +1,6 @@
 import React from "react";
 import { Menu, MenuButton, MenuList, MenuItem } from "@reach/menu-button";
 import monacoThemes from "monaco-themes/themes/themelist";
-import down from "../assets/chevron-down.svg";
 import "../styles/Selectors.css";
 
 const ThemeSelector = ({ handleThemeChange, theme }) => {
@@ -10,7 +9,6 @@ const ThemeSelector = ({ handleThemeChange, theme }) => {
       <Menu>
         <MenuButton className="menu-button">
           {theme?.label || "Select Theme"}
-          <img src={down} alt="Drop Down Arrow"/>
         </MenuButton>
         <MenuList className="menu-list">
           {Object.entries(monacoThemes).map(([themeId, themeName]) => (
