@@ -53,6 +53,13 @@
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 10px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.logout button:hover{
+    background-color: #4a5568;
+    transition: all 0.2s ease;
 }
 
 @media (max-width: 768px) {
