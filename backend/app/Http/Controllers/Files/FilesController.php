@@ -55,7 +55,7 @@ class FilesController extends Controller
     }
 
    public function get_all_files(){
-    $user = auth()->user();
+    $user = auth()->user(); // TODO
     $user_files = File::where('owner_id', $user->id)->get();
     if(!$user_files)
     {
@@ -68,6 +68,38 @@ class FilesController extends Controller
         "user_files"=> $user_files
     ],200);
    }
+
+   public function edit_file(Request $id){
+    $user = auth()->user();//TODO
+    $file_param=[
+        "id"=> $request->file_id,
+        "file"=>$request->file
+        ];
+    if(!$this->validate($file_param))
+    {
+        return response()->json([
+            "message"=> "All fields are required"
+        ],400);
+    }
+    $user_file = File::find($file_param->id);
+    if(!$user_file)
+    {
+        return response()->json([
+            "message"=>"No file with this name is available"
+        ],200); 
+    }
+    if (!Storage::exists($user_file->path)) {
+        return response()->json([
+            "message"=>"No stored file"
+        ],200); 
+    }
+    Storage::put($user_file->path, $file_param->file);
+    return response()->json([
+        "message"=>"File saved successfully",
+        "user_files"=> $user_files
+    ],200);
+   }
+
 
    //save file ...edit
    //delete file
