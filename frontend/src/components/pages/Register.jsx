@@ -1,7 +1,12 @@
 import React from "react";
 import Password from "../Password";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+    const navigate = useNavigate();
+    const handleRegister = () => {
+        navigate('/Home');
+      }
   return (
     <div class="login">
       <h1>Register</h1>
@@ -18,7 +23,8 @@ const Register = () => {
         required="required"
       />
       <Password />
-      <button className="">Let me in !</button>
+      <button onClick={handleRegister}>Register</button>
+      <p>Already have an account? <b onClick={() => {navigate('/')}}>Login</b></p>
     </div>
   );
 };
