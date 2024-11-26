@@ -73,9 +73,6 @@ const CodeEditorWindow = () => {
       <SideBar />
       <div className="CodeEditorWindow">
         <div className="selectors">
-          {/* <div className="language-selector">
-                        <LanguageSelector language={language} onSelect={onSelect} />
-                    </div> */}
           <div className="theme-selector">
             <ThemeSelector
               theme={theme}
@@ -101,7 +98,11 @@ const CodeEditorWindow = () => {
           </div>
         </div>
       </div>
+
       <div className="output-container">
+        <div className="logout">
+          <button>Log Out</button>
+        </div>
         <Output editorRef={editorRef} language={language} />
       </div>
     </div>
