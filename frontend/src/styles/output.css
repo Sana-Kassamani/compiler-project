@@ -10,14 +10,18 @@
 
 .output-container p{
   margin-bottom: 40px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.output-container b{
   font-size: 18px;
-  color: gray;
 }
 
 .output-box{
   background-color: #24292E;
-  box-shadow: -6px 0px 6px rgba(255, 255, 255, 0.5);
-  height: 40vh;
+  height: 50vh;
   padding: 15px;
   width: 400px;
   border-radius: 5px;

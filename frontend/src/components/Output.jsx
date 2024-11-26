@@ -31,8 +31,9 @@ const Output = ({editorRef, language}) => {
 
     return (
         <div className="output-container">
-            <p>Output</p>
+            
             <div className={`output-box ${isError ? 'error-output' : ''}`}>
+            <p><b>Output</b></p>
                 {output
                     ? output.map((line, i) => <p key={i}>{line}</p>)
                     : 'Click "Run Code" to see the output here'
