@@ -1,0 +1,28 @@
+.side-bar{
+    height: 100vh;
+    background-color: #24292E;
+    border-radius: 0 10px 10px 0;
+    color: #fff;
+    padding-left: 20px;
+}
+
+.file-description{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.file-description img{
+    width: 30px;
+    height: 30px;
+}
+
+.avatars{
+    display: flex;
+    gap: 20px;
+}
+
+.avatars h2{
+    padding: 10px 17px;
+    background-color: #2C0E69;
+    border-radius: 50px;
+}

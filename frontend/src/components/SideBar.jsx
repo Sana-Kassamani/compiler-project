@@ -1,14 +1,16 @@
 import React from "react";
+import File from '../components/File';
+import Python from '../assets/Python.png'
 import "../styles/SideBar.css";
+
 
 const SideBar = () => {
   return (
     <div className="side-bar">
       <div className="files">
         <h2>Files</h2>
-        <div>
-          <img src="" alt="" />
-          <p>File Name</p>
+        <div className="file-description">
+          <File type={Python} name={'App.py'}/>
         </div>
       </div>
       <div className="contributors">
