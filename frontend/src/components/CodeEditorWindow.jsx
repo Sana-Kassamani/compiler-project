@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
+import emailjs from '@emailjs/browser';
 import '../styles/editor.css';
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
@@ -44,6 +45,14 @@ const CodeEditorWindow = () => {
                 localStorage.setItem("editorTheme", JSON.stringify(theme));
             })
         }
+    }
+
+    const handleEmail = (from, to, email) => {
+        emailjs.send("service_sl9j08x","template_xh85vsl",{
+            from_name: from,
+            to_name: to,
+            to_email: email,
+            });
     }
 
     useEffect(() => {
