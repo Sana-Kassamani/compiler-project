@@ -6,6 +6,7 @@ import "../styles/editor.css";
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
 import Output from "./Output";
+import SideBar from "../components/SideBar";
 
 const CodeEditorWindow = () => {
   const [value, setValue] = useState("");
@@ -69,7 +70,7 @@ const CodeEditorWindow = () => {
 
   return (
     <div className="window">
-      <div className="files"></div>
+      <SideBar />
       <div className="CodeEditorWindow">
         <div className="selectors">
           {/* <div className="language-selector">
@@ -81,7 +82,9 @@ const CodeEditorWindow = () => {
               handleThemeChange={handleThemeChange}
             />
           </div>
-          <button className='ai-button selector' onClick={console.log('Hello')}>Analyze Code</button>
+          <button className="ai-button selector" onClick={console.log("Hello")}>
+            Analyze Code
+          </button>
         </div>
         <div className="editor-container">
           <div className="monaco-editor-container">
