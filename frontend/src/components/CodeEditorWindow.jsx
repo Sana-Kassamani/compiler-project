@@ -5,6 +5,7 @@ import '../styles/editor.css';
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
 import Output from "./Output";
+import TerminalWindow from "./TerminalWindow";
 
 const CodeEditorWindow = () => {
     const [value, setValue] = useState("");
