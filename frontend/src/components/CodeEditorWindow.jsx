@@ -66,8 +66,8 @@ const CodeEditorWindow = () => {
       setTheme(parsedTheme);
       defineTheme(parsedTheme.value);
     } else {
-      defineTheme("active4d").then((_) =>
-        setTheme({ value: "active4d", label: "Active4D" })
+      defineTheme("githubdark").then((_) =>
+        setTheme({ value: "Github Dark", label: "Github Dark" })
       );
     }
   }, []);
