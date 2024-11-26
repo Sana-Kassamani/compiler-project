@@ -12,4 +12,4 @@ const TerminalWindow = () => {
   return <div id="terminal" style={{ height: '200px', width: '100%' }}></div>;
 };
 
-export default TerminalWindow; 
+export default TerminalWindow;
