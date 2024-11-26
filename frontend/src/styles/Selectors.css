@@ -24,6 +24,10 @@
     transition: background-color 0.3s ease;
 }
 
+.ai-button{
+    background-color: #2C0E69;
+}
+
 .menu-button:hover {
     background-color: #4a5568;
 }

@@ -28,7 +28,12 @@
   color: #a94442;
 }
 
-.run-code-btn{
+.output-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.run-code-btn, .debug-button{
   margin-top: 30px;
   background-color: rgb(0, 143, 0);
   color: #edf2f7;
@@ -39,7 +44,14 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  align-self: flex-end;
+}
+
+.debug-button{
+  background-color: #2C0E69;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .run-code-btn:hover {

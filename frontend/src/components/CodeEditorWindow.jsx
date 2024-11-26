@@ -6,7 +6,6 @@ import "../styles/editor.css";
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
 import Output from "./Output";
-import AiButton from "./AiButton";
 
 const CodeEditorWindow = () => {
   const [value, setValue] = useState("");
@@ -82,8 +81,7 @@ const CodeEditorWindow = () => {
               handleThemeChange={handleThemeChange}
             />
           </div>
-
-          <AiButton onClick={console.log("test")}>Analyze Code</AiButton>
+          <button className='ai-button selector' onClick={console.log('Hello')}>Analyze Code</button>
         </div>
         <div className="editor-container">
           <div className="monaco-editor-container">

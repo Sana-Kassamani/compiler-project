@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import executeCode from "../utils/executeCode";
 import "../styles/output.css"
 import { languageOptions } from "../constants/languageOptions";
+import Bug from '../assets/bug-off.svg'
 
 const Output = ({editorRef, language}) => {
     const [output, setOutput] = useState(null);
@@ -37,13 +38,16 @@ const Output = ({editorRef, language}) => {
                     : 'Click "Run Code" to see the output here'
                 }
             </div>
-            <button
-                className="run-code-btn"
-                disabled={isloading}
-                onClick={runCode}
-            >
-                {isloading ? "Running..." : "Run Code"}
-            </button>
+            <div className="output-buttons">
+                <button className='debug-button' onClick={console.log('Hello')}><img src={Bug} alt="Bug Icon"/>Debug</button>
+                <button
+                    className="run-code-btn"
+                    disabled={isloading}
+                    onClick={runCode}
+                >
+                    {isloading ? "Running..." : "Run Code"}
+                </button>
+            </div>
         </div>
     )
 };
