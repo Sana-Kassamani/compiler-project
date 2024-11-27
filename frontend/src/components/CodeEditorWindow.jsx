@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import "../styles/base/base.css";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
@@ -8,8 +8,12 @@ import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
 import Output from "./Output";
 import SideBar from "../components/SideBar";
+import { fileContext } from "../context/fileContext";
 
 const CodeEditorWindow = () => {
+  const { selectedFile, list } = useContext(fileContext);
+  const [readOnly, setReadOnly] = useState(true);
+  const [defaultCode, setDefaultCode] = useState("Select a file to edit code");
   const [value, setValue] = useState("");
   const editorRef = useRef();
   const [language, setLanguage] = useState("javascript");
@@ -69,6 +73,21 @@ const CodeEditorWindow = () => {
       );
     }
   }, []);
+  useEffect(() => {
+    const currentFile = list[selectedFile];
+    console.log(currentFile, typeof currentFile);
+    if (currentFile) {
+      currentFile.content
+        ? setValue(currentFile.content)
+        : setValue("// some comment");
+      if (
+        !currentFile.shared ||
+        (currentFile.shared && currentFile.type === "editor")
+      ) {
+        setReadOnly(false);
+      }
+    }
+  }, [selectedFile]);
 
   return (
     <div className="window">
@@ -93,9 +112,10 @@ const CodeEditorWindow = () => {
               language={language}
               value={value}
               theme={theme.value}
-              defaultValue="// some comment"
+              defaultValue={defaultCode}
               onMount={onMount}
               onChange={handleEditorChange}
+              options={{ readOnly: readOnly }}
             />
           </div>
         </div>
