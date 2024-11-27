@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\JWTAuthController;
 use App\Http\Controllers\Files\FilesController;
 use App\Http\Middleware\JWTMiddleware;
 
-Route::post('/register', [JWTAuthController::class, 'register']);
+Route::post('register', [JWTAuthController::class, 'register']);
 Route::post('login', [JWTAuthController::class, 'login']);
 Route::get('unauthorized', [JWTAuthController::class, 'unauthorized'])->name("unauthorized");
 
@@ -20,6 +20,7 @@ Route::middleware(JWTMiddleware::class)->group(function () {
         Route::put("/", [FilesController::class, "save_file"]);
         Route::delete("/{id}", [FilesController::class, "delete_file"]);
       });
+      
 });
 
 
