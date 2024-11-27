@@ -17,7 +17,6 @@ class FilesController extends Controller
         foreach($request as $key => $value)
         {
             if (!$value ){
-                echo "This value is " . $value;
                 return false;
             }
         }
@@ -43,7 +42,6 @@ class FilesController extends Controller
             ];
         if(!$this->validate($file_param))
         {
-            echo json_encode($file_param);
             return response()->json([
                 "message"=> "All fields are required"
             ],400);
@@ -56,7 +54,7 @@ class FilesController extends Controller
             "file"=> $new_file
         ],200); 
     }
-    public function get_collaborating_files(){
+    public function get_collaborators(){
 
     }
    public function get_all_files(){
@@ -75,11 +73,20 @@ class FilesController extends Controller
     }
     foreach($user_files as $key => $file)
         {
+            if($file->owner_id === $user->id)
+            {
+                $file->shared=false;
+
+            }
+            else{
+                $file->shared=true;
+                $file->type = $file->collaborator_type;
+            }
             $file->content=Storage::get($file->path);
         }
     return response()->json([
         "message"=>"Files retrieved successfully",
-        "user_files"=> json_encode($user_files)
+        "user_files"=> $user_files
     ],200);
    }
 
