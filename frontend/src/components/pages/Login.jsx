@@ -14,8 +14,27 @@ const Login = () => {
   });
   const navigate = useNavigate();
   const handleLogin = () => {
-    navigate('/Home');
-  }
+    if (!validateForm(form)) {
+      setError("All fields are required!");
+      return;
+    }
+    try {
+      const response = request("login", requestMethods.POST, form);
+      localStorage.setItem("token", response.token);
+      navigate("/Home");
+    } catch (error) {
+      setError(error.response.data.message);
+      console.log(error.response.data.message);
+    }
+  };
+  const capturePassword = (e) => {
+    setForm((prev) => {
+      return {
+        ...prev,
+        password: e.target.value,
+      };
+    });
+  };
   return (
     <div class="login">
       <h1>Login</h1>
