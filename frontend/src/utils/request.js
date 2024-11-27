@@ -1,21 +1,21 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost/backend";
+axios.defaults.baseURL = "http://127.0.0.1:8000/api/";
 // axios.defaults.headers.Authorization = localStorage.token
 
-export const requestApi = async ({ route, method = "GET", body }) => {
+export const request = async ({ route, method = "GET", body }) => {
   try {
     const response = await axios.request({
-      url: `${route}.php`,
+      url: `${route}`,
       method,
       data: body,
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.token,
+        Authorization: `Bearer ${localStorage.token}`,
       },
     });
 
-    return response.data;
+    return { data: response.data, status: response.status };
   } catch (error) {
     console.log("======== Error =========");
     console.log(error.response.data.message);
