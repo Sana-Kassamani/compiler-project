@@ -16,6 +16,7 @@ class FilesController extends Controller
         foreach($request as $key => $value)
         {
             if (empty($value)){
+                echo "This value is " . $value;
                 return false;
             }
         }
@@ -69,10 +70,13 @@ class FilesController extends Controller
     ],200);
    }
 
-   public function edit_file(Request $id){
+   public function save_file(Request $request){
+    //validate user
     $user = auth()->user();//TODO
+
+    //validate request
     $file_param=[
-        "id"=> $request->file_id,
+        "id"=> $request->id,
         "file"=>$request->file
         ];
     if(!$this->validate($file_param))
@@ -81,22 +85,29 @@ class FilesController extends Controller
             "message"=> "All fields are required"
         ],400);
     }
-    $user_file = File::find($file_param->id);
+
+    //get file path from db
+    $user_file = File::find($file_param["id"]);
+    echo"Im here";
     if(!$user_file)
     {
         return response()->json([
             "message"=>"No file with this name is available"
         ],200); 
     }
-    if (!Storage::exists($user_file->path)) {
-        return response()->json([
-            "message"=>"No stored file"
-        ],200); 
+    //delete from storage and save new copy
+    if (Storage::exists($user_file->path)) {
+        Storage::delete($user_file->path);
     }
-    Storage::put($user_file->path, $file_param->file);
+    $new_path=Storage::putFile("CodeFiles",$file_param["file"]);
+    
+    // save new file path in db
+    $user_file->path=$new_path;
+    $user_file->save();
+    
     return response()->json([
         "message"=>"File saved successfully",
-        "user_files"=> $user_files
+        "user_files"=> $user_file
     ],200);
    }
 
