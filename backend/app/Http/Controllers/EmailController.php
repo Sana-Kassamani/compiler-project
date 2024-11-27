@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Invitation;
 
 class EmailController extends Controller
 {
@@ -19,12 +20,13 @@ class EmailController extends Controller
             "new_invitation" => $email
         ]);
     }
-    public function accept($id, Request $request){
-        $email = Invitation::find($id)->update([
+    public function accept(Request $request){
+        $email = Invitation::find($request->id)->update([
             'status' => 'accepted'
         ]);
         return response()->json([
             'updated_invitation' => $email
         ]);
     }
+    
 }
