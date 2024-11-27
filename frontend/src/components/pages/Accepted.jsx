@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { requestApi } from "../../utils/request";
 import Check from "../../assets/check.svg";
 import "../../styles/Accepted.css";
