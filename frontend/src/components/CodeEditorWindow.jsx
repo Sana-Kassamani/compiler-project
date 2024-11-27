@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/base/base.css";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
@@ -9,6 +10,7 @@ import ThemeSelector from "./ThemesSelector";
 import Output from "./Output";
 import SideBar from "../components/SideBar";
 import { fileContext } from "../context/fileContext";
+import { request } from "../utils/request";
 
 const CodeEditorWindow = () => {
   const { selectedFile, list } = useContext(fileContext);
@@ -18,6 +20,7 @@ const CodeEditorWindow = () => {
   const editorRef = useRef();
   const [language, setLanguage] = useState("javascript");
   const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
+  const navigate = useNavigate();
 
   // handle value in the editor
   const handleEditorChange = (value) => {
@@ -59,7 +62,22 @@ const CodeEditorWindow = () => {
     });
   };
 
-  const handleLogout = () => {};
+  const handleLogout = async () => {
+    try {
+      const response = await request({
+        route: "logout",
+      });
+      console.log(response);
+      if (response.status === 200) {
+        localStorage.removeItem("token");
+        navigate("/");
+      } else {
+        console.log(response.data.message);
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("editorTheme");
