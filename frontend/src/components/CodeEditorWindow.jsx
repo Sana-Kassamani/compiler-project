@@ -6,12 +6,18 @@ import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
 import Output from "./Output";
 import TerminalWindow from "./TerminalWindow";
+import CreateFileDialog from "./CreateFileDialog";
 
 const CodeEditorWindow = () => {
     const [value, setValue] = useState("");
     const editorRef = useRef();
     const [language, setLanguage] = useState("javascript");
     const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const onSelect = (language) => {
+        setLanguage(language);
+      };
 
     // handle value in the editor
     const handleEditorChange = (value) => {
@@ -40,6 +46,10 @@ const CodeEditorWindow = () => {
                 localStorage.setItem("editorTheme", JSON.stringify(theme));
             })
         }
+    }
+
+    const openFileDialog = () =>{ 
+        setOpenDialog(true);
     }
 
     useEffect(() => {
@@ -86,6 +96,12 @@ const CodeEditorWindow = () => {
             <div className="output-container">
                 <Output editorRef={editorRef} language={language}/>
             </div>
+
+            <button onClick={openFileDialog}>Hello</button>
+
+            {openDialog && (
+                    <CreateFileDialog/>
+            )}
         </div>
     );
 };

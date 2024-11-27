@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import LanguageSelector from "./LanguageSelector";
+import "../styles/dialog.css"
 
 const CreateFileDialog = () => {
     const [language, setLanguage] = useState("javascript");
@@ -24,10 +25,12 @@ const CreateFileDialog = () => {
             </div>
             <div className="dialog-buttons">  
               <button className="close-dialog">Close</button>
-              <button className="create-button">Save</button>
+              <button className="create-button">Create</button>
             </div>
           </div>
         </dialog>
     );
 
-}
+};
+
+export default CreateFileDialog;
