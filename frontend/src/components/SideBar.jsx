@@ -1,10 +1,20 @@
-import React from "react";
-import File from "../components/File";
+import React, { useContext } from "react";
+import FileComp from "../components/File";
 import Plus from "../assets/plus.svg";
 import Python from "../assets/Python.png";
 import "../styles/SideBar.css";
+import { fileContext } from "../context/fileContext";
 
 const SideBar = () => {
+  const { list, createFile, setSelectedFile } = useContext(fileContext);
+
+  console.log("Type of list is", typeof list);
+  console.log(list);
+  const createEmptyFile = () => {
+    const blob = new Blob([""], { type: "text/plain" });
+    const file = new File([blob], "emptyFile.txt", { type: "text/plain" });
+    return file;
+  };
   return (
     <div className="side-bar">
       <div className="files">
