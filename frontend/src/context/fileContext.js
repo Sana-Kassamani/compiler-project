@@ -57,11 +57,36 @@ const FilesProvider = ({ children }) => {
 
   //     }
 
-  //   const saveFile = (id) => {
-  //     axios.put("http://127.0.0.1:8000/api/courses").then(({ data }) => {
-  //       setCourses(data.courses);
-  //     });
-  //   };
+  const saveFile = async (form) => {
+    try {
+      const response = await request({
+        route: "/file/save",
+        method: requestMethods.POST,
+        body: form,
+        header: "multipart/form-data",
+      });
+      console.log(response);
+      if (response.status === 200) {
+        const newFile = response.data.user_file;
+        setFiles((prev) => {
+          console.log(response.data);
+          console.log("Prev list is", prev);
+          const updatedFiles = prev.map((file) =>
+            file.id === newFile.id
+              ? { ...file, path: newFile.path, content: newFile.content }
+              : file
+          );
+
+          return updatedFiles;
+        });
+      } else {
+        console.log(response?.data?.message);
+        console.log(response.data.message);
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
 
   //   const deleteFile = (id) => {
   //     axios.delete("http://127.0.0.1:8000/api/courses").then(({ data }) => {
@@ -79,9 +104,8 @@ const FilesProvider = ({ children }) => {
         selectedFile: selectedFile,
         list: files,
         setSelectedFile,
-        // filtered: filtered,
-        // getCourses,
         createFile,
+        saveFile,
         // editCourse,
         // deleteCourse,
       }}
