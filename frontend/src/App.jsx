@@ -4,6 +4,7 @@ import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import "./styles/App.css";
 import FilesProvider from "./context/fileContext";
+import Accepted from "./components/pages/Accepted";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/Register" element={<Register />} />
             <Route path="/Home" element={<CodeEditorWindow />} />
+            <Route path="/Accepted" element={<Accepted />} />
           </Routes>
         </FilesProvider>
       </BrowserRouter>

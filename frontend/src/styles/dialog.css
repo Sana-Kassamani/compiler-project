@@ -1,0 +1,101 @@
+.dialog{
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 30%;
+    position: fixed;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5); 
+}
+
+.dialog .dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dialog-details {
+    margin-bottom: 20px;
+}
+
+.detail-item {
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+.detail-item label {
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.detail-item input, .detail-item .language-input{
+    margin-top: 10px;
+}
+
+.detail-item span {
+    color: #333;
+    display: inline-block; 
+}
+
+.dialog-buttons {
+    text-align: center; 
+}
+
+.dialog-buttons button {
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s;
+    margin: 0 5px;
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+}
+
+.dialog-buttons .close-dialog{
+    background-color: #2d3748;
+}
+
+.dialog-buttons .create-button, .dialog-buttons .invite-button{
+    background-color: #087C3E;
+}
+
+.dialog-buttons .create-button:hover, .dialog-buttons .invite-button:hover {
+    background-color: #0A9C4E;
+}
+
+.dialog-buttons .close-dialog:hover{
+    background-color: #49586d;
+}
+
+.detail-item input, .detail-item select{
+    width: calc(100% - 20px);
+    padding: 10px; ;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.menu-list {
+    position: absolute;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error{
+    color: red;
+}

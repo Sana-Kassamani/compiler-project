@@ -1,5 +1,5 @@
 import axios from "axios";
-import { languageOptions } from "../constants/languageOptions";
+import { languageOptions } from "../constants/LanguageOptions";
 
 const API = axios.create({
     baseURL: "https://emkc.org/api/v2/piston",

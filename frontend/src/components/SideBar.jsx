@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import FileComp from "../components/File";
 import Plus from "../assets/plus.svg";
 import Python from "../assets/Python.png";
 import "../styles/SideBar.css";
 import { fileContext } from "../context/fileContext";
+import CreateFileDialog from "./CreateFileDialog";
 
 const SideBar = () => {
   const { list, createFile, setSelectedFile } = useContext(fileContext);
@@ -15,6 +16,27 @@ const SideBar = () => {
     const file = new File([blob], "emptyFile.txt", { type: "text/plain" });
     return file;
   };
+  const [openCreateFileDialog, setopenCreateFileDialog] = useState(false);
+
+  // open create file dialog
+  const openFileDialog = () => {
+    setopenCreateFileDialog(true);
+  };
+
+  // close the create file dialog
+  const closeFileDialog = () => {
+    setopenCreateFileDialog(false);
+  };
+
+  // create the file
+  const createFileSecond = (fileName, language) => {
+    // (Sana)
+    // create the file
+    // before adding the file to the db put the extension with the file in the db using the LanguageExtensions constant
+
+    closeFileDialog();
+  };
+
   return (
     <div className="side-bar">
       <div className="files">
@@ -28,6 +50,7 @@ const SideBar = () => {
               form.append("file", createEmptyFile());
               createFile(form);
             }}
+            // onClick={openFileDialog}
           >
             <img src={Plus} alt="Add File" />
           </button>
@@ -55,6 +78,10 @@ const SideBar = () => {
           <h2>A</h2>
         </div>
       </div>
+
+      {openCreateFileDialog && (
+        <CreateFileDialog onClose={closeFileDialog} onCreate={createFile} />
+      )}
     </div>
   );
 };

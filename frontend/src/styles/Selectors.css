@@ -32,7 +32,17 @@
     background-color: #4a5568;
 }
 
+.menu-button-language{
+    background-color: #edf2f7;
+    color: #2d3748;
+}
+
+.menu-button-language:hover{
+    background-color: #8ca0c3;
+}
+
 .menu-list {
+    z-index: 1000;
     height: 200px;
     overflow-y: scroll;
     background-color: #110c1b;

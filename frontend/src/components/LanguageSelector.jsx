@@ -1,14 +1,13 @@
 import React from "react";
 import { Menu, MenuButton, MenuList, MenuItem } from "@reach/menu-button";
-import { languageOptions } from "../constants/languageOptions";
+import { languageOptions } from "../constants/LanguageOptions";
 import '../styles/Selectors.css';
 
 const LanguageSelector = ({ language, onSelect }) => {
   return (
     <div className="selector">
-        <p className="text">Language:</p>
         <Menu>
-            <MenuButton className="menu-button">
+            <MenuButton className="menu-button menu-button-language">
                 {language}
             </MenuButton>
             <MenuList className="menu-list">

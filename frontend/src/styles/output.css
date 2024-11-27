@@ -26,11 +26,11 @@
   width: 400px;
   border-radius: 5px;
   color: #fff;
+  overflow-y: scroll;
 }
 
-.output-box.error-output {
-  background-color: #fdecea;
-  color: #a94442;
+.error-output {
+  color: red;
 }
 
 .output-buttons{

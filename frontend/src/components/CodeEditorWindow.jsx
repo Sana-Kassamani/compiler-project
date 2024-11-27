@@ -4,10 +4,14 @@ import "../styles/base/base.css";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import emailjs from "@emailjs/browser";
+import { requestApi } from "../utils/request";
 import "../styles/editor.css";
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
 import Output from "./Output";
+import TerminalWindow from "./TerminalWindow";
+import CreateFileDialog from "./CreateFileDialog";
+import InviteDialog from "./InviteDialog";
 import SideBar from "../components/SideBar";
 import { fileContext } from "../context/fileContext";
 import { request } from "../utils/request";
@@ -25,7 +29,6 @@ const CodeEditorWindow = () => {
   // handle value in the editor
   const handleEditorChange = (value) => {
     setValue(value);
-    console.log(value);
   };
 
   // set focus on tthe compiler
@@ -40,7 +43,8 @@ const CodeEditorWindow = () => {
   };
 
   // handle theme change
-  const handleThemeChange = (theme) => {
+  const handleThemeChange = (th) => {
+    const theme = th;
     console.log("theme...", theme);
     console.log(theme);
     if (["light", "vs-dark"].includes(theme.value)) {
@@ -54,12 +58,34 @@ const CodeEditorWindow = () => {
     }
   };
 
-  const handleEmail = (from, to, email) => {
-    emailjs.send("service_sl9j08x", "template_xh85vsl", {
-      from_name: from,
-      to_name: to,
-      to_email: email,
+  const handleEmail = async (from, to, email) => {
+    const result = await requestApi({
+      route: "/invite",
+      body: {},
     });
+    const id = result.id;
+    emailjs.send(
+      "service_sl9j08x",
+      "template_xh85vsl",
+      {
+        from_name: from,
+        to_name: to,
+        to_email: email,
+        id,
+      },
+      "j9bxn6hYnwUkTqR9o"
+    );
+  };
+
+  const handleAnalyze = async () => {
+    const result = await requestApi({
+      route: "/analyze",
+      body: {
+        code: value,
+      },
+      method: "POST",
+    });
+    console.log(result.message);
   };
 
   const handleLogout = async () => {
@@ -78,7 +104,6 @@ const CodeEditorWindow = () => {
       console.log(error.response.data.message);
     }
   };
-
   const handleSave = async () => {
     const blob = new Blob([value], { type: "text/plain" });
     const file = new File([blob], list[selectedFile].filename, {
@@ -91,6 +116,7 @@ const CodeEditorWindow = () => {
     form.append("file", file);
     saveFile(form);
   };
+
   useEffect(() => {
     const savedTheme = localStorage.getItem("editorTheme");
     if (savedTheme) {
@@ -98,8 +124,8 @@ const CodeEditorWindow = () => {
       setTheme(parsedTheme);
       defineTheme(parsedTheme.value);
     } else {
-      defineTheme("githubdark").then((_) =>
-        setTheme({ value: "Github Dark", label: "Github Dark" })
+      defineTheme("acive4d").then((_) =>
+        setTheme({ value: "Acive4D", label: "Acive4D" })
       );
     }
   }, []);
