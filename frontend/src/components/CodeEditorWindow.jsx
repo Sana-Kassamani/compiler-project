@@ -4,7 +4,6 @@ import "../styles/base/base.css";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import emailjs from "@emailjs/browser";
-import { requestApi } from "../utils/request";
 import "../styles/editor.css";
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
@@ -59,7 +58,7 @@ const CodeEditorWindow = () => {
   };
 
   const handleEmail = async (from, to, email) => {
-    const result = await requestApi({
+    const result = await request({
       route: "/invite",
       body: {},
     });
@@ -78,7 +77,7 @@ const CodeEditorWindow = () => {
   };
 
   const handleAnalyze = async () => {
-    const result = await requestApi({
+    const result = await request({
       route: "/analyze",
       body: {
         code: value,
