@@ -95,7 +95,9 @@ class JWTAuthController extends Controller
             return response()->json(['error' => 'Invalid token'], 400);
         }
 
-        return response()->json(compact('user'));
+        return response()->json([
+            "user"=>$user
+        ]);
     }
 
     // User logout
@@ -103,11 +105,11 @@ class JWTAuthController extends Controller
     {
         JWTAuth::invalidate(JWTAuth::getToken());
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Successfully logged out'],200);
     }
 
     public function unauthorized(){
-        return response()->json(['message' => 'Unauthorized access'],401);
+        return redirect()->route('unauthorized');
     }
 
     
