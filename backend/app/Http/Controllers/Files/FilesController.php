@@ -97,6 +97,7 @@ class FilesController extends Controller
         "id"=> $request->id,
         "file"=>$request->file
         ];
+
     if(!$this->validate($file_param))
     {
         return response()->json([
@@ -121,10 +122,10 @@ class FilesController extends Controller
     // save new file path in db
     $user_file->path=$new_path;
     $user_file->save();
-    
+    $user_file->content=Storage::get($user_file->path);
     return response()->json([
         "message"=>"File saved successfully",
-        "user_files"=> $user_file
+        "user_file"=> $user_file
     ],200);
    }
 
