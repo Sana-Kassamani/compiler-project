@@ -15,6 +15,7 @@ const CodeEditorWindow = () => {
     const [language, setLanguage] = useState("javascript");
     const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
     const [openCreateFileDialog, setopenCreateFileDialog] = useState(false);
+    const [openInviteDialog, setopenInviteDialog] = useState(false);
 
     const onSelect = (language) => {
         setLanguage(language);
@@ -68,8 +69,6 @@ const CodeEditorWindow = () => {
 
         closeFileDialog();
     }
-
-    
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("editorTheme");
@@ -125,9 +124,6 @@ const CodeEditorWindow = () => {
                     onCreate={createFile}
                 />
             )}
-
-            
-
         </div>
     );
 };
