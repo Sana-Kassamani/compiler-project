@@ -25,6 +25,7 @@
 }
 
 .menu-list {
+    z-index: 1000;
     height: 200px;
     overflow-y: scroll;
     background-color: #110c1b;
