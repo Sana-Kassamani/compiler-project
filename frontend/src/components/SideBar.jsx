@@ -20,26 +20,30 @@ const SideBar = () => {
       <div className="files">
         <div className="files-title">
           <h2>Files</h2>
-          <button>
+          <button
+            onClick={() => {
+              const form = new FormData();
+              form.append("filename", "newFileFromFE");
+              form.append("language", "python");
+              form.append("file", createEmptyFile());
+              createFile(form);
+            }}
+          >
             <img src={Plus} alt="Add File" />
           </button>
         </div>
         <div className="file-list">
-          <File type={Python} name={"App.py"} shared={true} />
-          <File type={Python} name={"App.py"} />
-          <File type={Python} name={"App.py"} />
-          <File type={Python} name={"App.py"} />
-          <File type={Python} name={"App.py"} shared={true} />
-          <File type={Python} name={"App.py"} />
-          <File type={Python} name={"App.py"} shared={true} />
-          <File type={Python} name={"App.py"} />
-          <File type={Python} name={"App.py"} shared={true} />
-          <File type={Python} name={"App.py"} />
-          <File type={Python} name={"App.py"} />
-          <File type={Python} name={"App.py"} shared={true} />
-          <File type={Python} name={"App.py"} />
-          <File type={Python} name={"App.py"} />
-          <File type={Python} name={"App.py"} shared={true} />
+          {list.map((f, index) => (
+            <FileComp
+              key={index}
+              index={index}
+              file={f}
+              type={Python}
+              // name={f.filename}
+              // shared={f.shared}
+              // userType={f.type}
+            />
+          ))}
         </div>
       </div>
       <div className="contributors">
