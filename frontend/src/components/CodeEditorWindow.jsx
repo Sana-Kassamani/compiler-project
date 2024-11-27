@@ -13,7 +13,7 @@ import { fileContext } from "../context/fileContext";
 import { request } from "../utils/request";
 
 const CodeEditorWindow = () => {
-  const { selectedFile, list } = useContext(fileContext);
+  const { selectedFile, list, saveFile } = useContext(fileContext);
   const [readOnly, setReadOnly] = useState(true);
   const [defaultCode, setDefaultCode] = useState("Select a file to edit code");
   const [value, setValue] = useState("");
@@ -79,6 +79,18 @@ const CodeEditorWindow = () => {
     }
   };
 
+  const handleSave = async () => {
+    const blob = new Blob([value], { type: "text/plain" });
+    const file = new File([blob], list[selectedFile].filename, {
+      type: "text/plain",
+    });
+    const form = new FormData();
+    console.log("id", list[selectedFile].id);
+    console.log("file", file);
+    form.append("id", list[selectedFile].id);
+    form.append("file", file);
+    saveFile(form);
+  };
   useEffect(() => {
     const savedTheme = localStorage.getItem("editorTheme");
     if (savedTheme) {
@@ -118,6 +130,7 @@ const CodeEditorWindow = () => {
               handleThemeChange={handleThemeChange}
             />
           </div>
+          {selectedFile !== null && <button onClick={handleSave}>Save</button>}
           <button className="ai-button selector" onClick={console.log("Hello")}>
             Analyze Code
           </button>
