@@ -19,7 +19,7 @@ Route::middleware(JWTMiddleware::class)->group(function () {
         Route::post("/", [FilesController::class, "create_file"]);
         Route::put("/", [FilesController::class, "save_file"]);
         // Route::put("/{id}", [NewsController::class, "editNews"]);
-        // Route::delete("/{id}", [NewsController::class, "deleteNews"]);
+        Route::delete("/{id}", [FilesController::class, "delete_file"]);
       });
 });
 

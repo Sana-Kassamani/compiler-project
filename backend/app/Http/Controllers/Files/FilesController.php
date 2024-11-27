@@ -88,7 +88,6 @@ class FilesController extends Controller
 
     //get file path from db
     $user_file = File::find($file_param["id"]);
-    echo"Im here";
     if(!$user_file)
     {
         return response()->json([
@@ -112,7 +111,33 @@ class FilesController extends Controller
    }
 
 
-   //save file ...edit
+
+   public function delete_file($id){
+    if(!$id)
+    {
+        return response()->json([
+            "message"=> "All fields are required"
+        ],400);
+
+    }
+    $user_file = File::find($id);
+    if(!$user_file)
+    {
+        return response()->json([
+            "message"=>"No file with this name to delete"
+        ],200); 
+    }
+    if (Storage::exists($user_file->path)) {
+        Storage::delete($user_file->path);
+       
+    }
+    
+    File::destroy($id);
+
+    return response()->json([
+        "message"=>"File deleted successfully"
+    ],200);
+    }
    //delete file
    // get one file
 }
