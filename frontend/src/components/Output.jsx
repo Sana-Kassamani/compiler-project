@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import executeCode from "../utils/executeCode";
 import "../styles/output.css"
-import { languageOptions } from "../constants/languageOptions";
+import { languageOptions } from "../constants/LanguageOptions";
 
 const Output = ({editorRef, language}) => {
     const [output, setOutput] = useState(null);

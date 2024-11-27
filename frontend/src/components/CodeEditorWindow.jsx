@@ -48,8 +48,23 @@ const CodeEditorWindow = () => {
         }
     }
 
+    // open create file dialog
     const openFileDialog = () =>{ 
         setOpenDialog(true);
+    }
+
+    // close the dialog
+    const closeFileDialog = () =>{ 
+        setOpenDialog(false);
+    }
+
+    // create the file
+    const createFile = () => {
+        // handle if no input in the file name
+        // create the file
+        // before adding the file to the db put the extension with the file in the db using the LanguageExtensions constant
+
+        closeFileDialog();
     }
 
     useEffect(() => {
@@ -97,10 +112,14 @@ const CodeEditorWindow = () => {
                 <Output editorRef={editorRef} language={language}/>
             </div>
 
+            {/* the button to be changed, it is only to try to open the dialog*/}
             <button onClick={openFileDialog}>Hello</button>
 
             {openDialog && (
-                    <CreateFileDialog/>
+                <CreateFileDialog
+                    onClose={closeFileDialog}
+                    onCreate={createFile}
+                />
             )}
         </div>
     );

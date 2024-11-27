@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LanguageSelector from "./LanguageSelector";
 import "../styles/dialog.css"
 
-const CreateFileDialog = () => {
+const CreateFileDialog = ({onClose, onCreate}) => {
     const [language, setLanguage] = useState("javascript");
 
     const onSelect = (language) => {
@@ -26,8 +26,8 @@ const CreateFileDialog = () => {
               </div>
             </div>
             <div className="dialog-buttons">  
-              <button className="close-dialog">Close</button>
-              <button className="create-button">Create</button>
+              <button className="close-dialog" onClick={onClose}>Close</button>
+              <button className="create-button" onClick={onCreate}>Create</button>
             </div>
           </div>
         </dialog>
