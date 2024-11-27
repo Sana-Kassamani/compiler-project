@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import "../styles/base/base.css";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import emailjs from "@emailjs/browser";
@@ -32,8 +33,7 @@ const CodeEditorWindow = () => {
   };
 
   // handle theme change
-  const handleThemeChange = (th) => {
-    const theme = th;
+  const handleThemeChange = (theme) => {
     console.log("theme...", theme);
     console.log(theme);
     if (["light", "vs-dark"].includes(theme.value)) {
@@ -55,9 +55,7 @@ const CodeEditorWindow = () => {
     });
   };
 
-  const handleLogout = () =>{
-    
-  }
+  const handleLogout = () => {};
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("editorTheme");

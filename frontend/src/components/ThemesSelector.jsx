@@ -12,17 +12,17 @@ const ThemeSelector = ({ handleThemeChange, theme }) => {
         </MenuButton>
         <MenuList className="menu-list">
           {Object.entries(monacoThemes).map(([themeId, themeName]) => (
-              <MenuItem
-                key={themeId}
-                className={`menu-item ${
-                  theme?.value === themeId ? "active" : ""
-                }`}
-                onClick={() =>
-                  handleThemeChange({ value: themeId, label: themeName })
-                }
-              >
-                {themeName}
-              </MenuItem>
+            <MenuItem
+              key={themeId}
+              className={`menu-item ${
+                theme?.value === themeId ? "active" : ""
+              }`}
+              onClick={() =>
+                handleThemeChange({ value: themeId, label: themeName })
+              }
+            >
+              {themeName}
+            </MenuItem>
           ))}
         </MenuList>
       </Menu>

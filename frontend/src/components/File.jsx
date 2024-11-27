@@ -8,7 +8,7 @@ const File = ({ type, name, shared }) => {
         <img src={type} alt="" />
         <p>{name}</p>
       </div>
-      {shared ? (<p>Shared</p>) : (<img src={Invite} alt="Invite Button" />)}
+      {shared ? <p>Shared</p> : <img src={Invite} alt="Invite Button" />}
     </div>
   );
 };
