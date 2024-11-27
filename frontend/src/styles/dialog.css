@@ -70,11 +70,11 @@
     background-color: #2d3748;
 }
 
-.dialog-buttons .create-button{
+.dialog-buttons .create-button, .dialog-buttons .invite-button{
     background-color: #087C3E;
 }
 
-.dialog-buttons .create-button:hover {
+.dialog-buttons .create-button:hover, .dialog-buttons .invite-button:hover {
     background-color: #0A9C4E;
 }
 

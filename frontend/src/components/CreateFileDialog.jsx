@@ -16,12 +16,12 @@ const CreateFileDialog = ({onClose, onCreate}) => {
             <div className="dialog-details">
               <div className="detail-item">
                 <label>File name:</label>
-                <input type="text" name="file"/>
+                <input type="text" name="file" placeholder="file name" required/>
               </div>
               <div className="detail-item">
                 <label>Select Language:</label>
                 <div className="language-input">
-                  <LanguageSelector language={language} onSelect={onSelect} className="languageSelector"/>
+                  <LanguageSelector language={language} onSelect={onSelect}/>
                 </div>
               </div>
             </div>

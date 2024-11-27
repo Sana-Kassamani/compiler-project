@@ -7,13 +7,14 @@ import ThemeSelector from "./ThemesSelector";
 import Output from "./Output";
 import TerminalWindow from "./TerminalWindow";
 import CreateFileDialog from "./CreateFileDialog";
+import InviteDialog from "./InviteDialog";
 
 const CodeEditorWindow = () => {
     const [value, setValue] = useState("");
     const editorRef = useRef();
     const [language, setLanguage] = useState("javascript");
     const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
-    const [openDialog, setOpenDialog] = useState(false);
+    const [openCreateFileDialog, setopenCreateFileDialog] = useState(false);
 
     const onSelect = (language) => {
         setLanguage(language);
@@ -50,22 +51,25 @@ const CodeEditorWindow = () => {
 
     // open create file dialog
     const openFileDialog = () =>{ 
-        setOpenDialog(true);
+        setopenCreateFileDialog(true);
     }
 
-    // close the dialog
+    // close the create file dialog
     const closeFileDialog = () =>{ 
-        setOpenDialog(false);
+        setopenCreateFileDialog(false);
     }
 
     // create the file
     const createFile = () => {
+        // (Sana)
         // handle if no input in the file name
         // create the file
         // before adding the file to the db put the extension with the file in the db using the LanguageExtensions constant
 
         closeFileDialog();
     }
+
+    
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("editorTheme");
@@ -115,12 +119,15 @@ const CodeEditorWindow = () => {
             {/* the button to be changed, it is only to try to open the dialog*/}
             <button onClick={openFileDialog}>Hello</button>
 
-            {openDialog && (
+            {openCreateFileDialog && (
                 <CreateFileDialog
                     onClose={closeFileDialog}
                     onCreate={createFile}
                 />
             )}
+
+            
+
         </div>
     );
 };
