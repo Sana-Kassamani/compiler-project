@@ -1,17 +1,16 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost/backend";
+axios.defaults.baseURL = "http://127.0.0.1:8000";
 // axios.defaults.headers.Authorization = localStorage.token
 
 export const requestApi = async ({ route, method = "GET", body }) => {
   try {
     const response = await axios.request({
-      url: `${route}.php`,
+      url: `${route}`,
       method,
       data: body,
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.token,
       },
     });
 

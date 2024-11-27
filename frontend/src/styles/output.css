@@ -10,17 +10,22 @@
 
 .output-container p{
   margin-bottom: 40px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.output-container b{
   font-size: 18px;
-  color: gray;
 }
 
 .output-box{
-  background-color: white;
-  box-shadow: -6px 0px 6px rgba(255, 255, 255, 0.5);
-  height: 40vh;
+  background-color: #24292E;
+  height: 50vh;
   padding: 15px;
   width: 400px;
   border-radius: 5px;
+  color: #fff;
 }
 
 .output-box.error-output {
@@ -28,9 +33,14 @@
   color: #a94442;
 }
 
-.run-code-btn{
+.output-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.run-code-btn, .debug-button{
   margin-top: 30px;
-  background-color: rgb(0, 143, 0);
+  background-color: #39275B;
   color: #edf2f7;
   padding: 10px 20px;
   border-radius: 8px;
@@ -39,11 +49,18 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  align-self: flex-end;
+}
+
+.debug-button{
+  background-color: #2C0E69;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .run-code-btn:hover {
-  background-color: rgb(0, 112, 0);
+  background-color: #2b1d44;
 }
 
 .run-code-btn:disabled {

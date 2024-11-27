@@ -12,16 +12,6 @@
     justify-content: space-between;
     align-items: center; 
     width: 100%;
-    max-width: 600px;
-    padding: 0 16px;
-}
-
-.language-selector{
-    margin-left: 30px;
-}
-
-.theme-selector{
-    margin-right: 30px;
 }
 
 .CodeEditorWindow {
@@ -48,6 +38,28 @@
     border: 2px solid #444;
     background-color: #1a202c;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.logout{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logout button{
+    border: none;
+    background-color: #2D3748;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.logout button:hover{
+    background-color: #4a5568;
+    transition: all 0.2s ease;
 }
 
 @media (max-width: 768px) {

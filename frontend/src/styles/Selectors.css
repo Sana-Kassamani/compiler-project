@@ -8,7 +8,11 @@
     color: gray;
 }
 
-.menu-button {
+.menu-button, .ai-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     background-color: #2d3748;
     color: #edf2f7;
     padding: 10px 20px;
@@ -18,6 +22,10 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.ai-button{
+    background-color: #2C0E69;
 }
 
 .menu-button:hover {
