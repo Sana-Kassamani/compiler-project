@@ -20,8 +20,8 @@ class EmailController extends Controller
             "new_invitation" => $email
         ]);
     }
-    public function accept(Request $request){
-        $email = Invitation::find($request->id)->update([
+    public function accept($id){
+        $email = Invitation::find($id)->update([
             'status' => 'accepted'
         ]);
         return response()->json([

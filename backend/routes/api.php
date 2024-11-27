@@ -11,7 +11,7 @@ Route::post('register', [JWTAuthController::class, 'register']);
 Route::post('login', [JWTAuthController::class, 'login']);
 Route::get('unauthorized', [JWTAuthController::class, 'unauthorized'])->name("unauthorized");
 Route::post('/invite', [EmailController::class, 'invite']);
-Route::put('/accept', [EmailController::class, 'accept']);
+Route::get('/accept/{id}', [EmailController::class, 'accept']);
 Route::post('/debug', [AiController::class, 'debug']);
 Route::post('/analyze', [AiController::class, 'analyze']);
 

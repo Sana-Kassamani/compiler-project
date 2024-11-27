@@ -47,11 +47,20 @@ const CodeEditorWindow = () => {
     }
   };
 
-  const handleEmail = (from, to, email) => {
+  const handleEmail = async (from, to, email) => {
+    const result = await requestApi({
+      route: '/invite',
+      body: {
+   
+      }
+
+    })
+    const id = result.id
     emailjs.send("service_sl9j08x", "template_xh85vsl", {
       from_name: from,
       to_name: to,
       to_email: email,
+      id
     }, 'j9bxn6hYnwUkTqR9o');
   };
 
