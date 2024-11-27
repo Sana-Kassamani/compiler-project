@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 class EmailController extends Controller
 {
     public function invite(Request $request){
-        $email = Invitations::create([
+        $email = Invitation::create([
             "inviting_user_id" => $request->inviting,
             "invited_user_id" => $request->invited,
             "file_id" => $request->file,
-            "status" => $request->status,
+            "status" => 'pending',
             "invited_user_type" => $request->type
         ]);
 
@@ -20,8 +20,11 @@ class EmailController extends Controller
         ]);
     }
     public function accept($id, Request $request){
-        $email = Invitations::find($id)->update([
-            
+        $email = Invitation::find($id)->update([
+            'status' => 'accepted'
+        ]);
+        return response()->json([
+            'updated_invitation' => $email
         ]);
     }
 }
