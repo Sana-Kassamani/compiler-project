@@ -6,7 +6,6 @@ import '../styles/Selectors.css';
 const LanguageSelector = ({ language, onSelect }) => {
   return (
     <div className="selector">
-        <p className="text">Language:</p>
         <Menu>
             <MenuButton className="menu-button">
                 {language}

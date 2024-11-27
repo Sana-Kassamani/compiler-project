@@ -25,11 +25,6 @@ const CodeEditorWindow = () => {
         editor.focus();
     };
 
-    // select language
-    const onSelect = (language) => {
-        setLanguage(language);
-    };
-
     // handle theme change
     const handleThemeChange = (th) => {
         const theme = th;
