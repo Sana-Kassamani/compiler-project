@@ -16,46 +16,72 @@ class JWTAuthController extends Controller
     
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+        if(!$request->username || !$request->password || !$request-> email)
+        {
+            return response()->json([
+                "message"=> "All fields are required!"
+            ], 400);
 
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
         }
-
-        $user = User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = new User;
+        $user->username = $request->username;
+        $user->password = Hash::make($request->password);
+        $user->email = $request->email;
+        $user->save();
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user','token'), 201);
+        // $validator = Validator::make($request->all(), [
+        //     'username' => 'required|string|max:255',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'password' => 'required|string|min:6',
+        // ]);
+
+        // if($validator->fails()){
+        //     return response()->json($validator->errors()->toJson(), 400);
+        // }
+
+        // $user = User::create([
+        //     'username' => $request->username,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
+        // $token = JWTAuth::fromUser($user);
+
+        return response()->json([
+            "user"=>$user,
+            "token"=>$token,
+        ], 201);
     }
 
     public function login(Request $request)
     {
+        if(!$request->password || !$request-> email)
+        {
+            return response()->json([
+                "message"=> "All fields are required!"
+            ], 400);
+
+        }
         $credentials = $request->only('email', 'password');
-        echo json_encode($credentials);
         try {
             
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'Invalid credentials'], 401);
+                return response()->json(['message' => 'Invalid credentials'], 401);
             }
             // Get the authenticated user.
-            $user = auth()->user();
+            $user = Auth::user();
 
             // (optional) Attach the role to the token.
             // $token = JWTAuth::claims(['role' => $user->role])->fromUser($user);
             $token = JWTAuth::fromUser($user);
 
-            return response()->json(compact('token'));
+            return response()->json([
+                "token"=>$token,
+            ],200);
         } catch (JWTException $e) {
-            return response()->json(['error' => 'Could not create token'], 500);
+            return response()->json(['message' => 'Could not create token'], 500);
         }
     }
 
