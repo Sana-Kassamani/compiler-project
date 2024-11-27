@@ -64,6 +64,10 @@ class FilesController extends Controller
             "message"=>"No files available"
         ],200); 
     }
+    foreach($user_files as $key => $file)
+        {
+            $user_files[$key]["content"]=Storage::get($user_files[$key]["path"]);
+        }
     return response()->json([
         "message"=>"Files retrieved successfully",
         "user_files"=> $user_files
@@ -71,8 +75,6 @@ class FilesController extends Controller
    }
 
    public function save_file(Request $request){
-    //validate user
-    $user = auth()->user();//TODO
 
     //validate request
     $file_param=[
@@ -113,6 +115,7 @@ class FilesController extends Controller
 
 
    public function delete_file($id){
+    $user = auth()->user();
     if(!$id)
     {
         return response()->json([
@@ -138,6 +141,19 @@ class FilesController extends Controller
         "message"=>"File deleted successfully"
     ],200);
     }
-   //delete file
-   // get one file
+   
+    // public function get_file($id){
+    //     $user_file = File::find($id);
+    //     if(!$user_file)
+    //     {
+    //         return response()->json([
+    //             "message"=>"No file available"
+    //         ],200); 
+    //     }
+    //     return response()->json([
+    //         "message"=>"File retrieved successfully",
+    //         "user_file"=> $user_file
+    //     ],200);
+       
+    // }
 }
