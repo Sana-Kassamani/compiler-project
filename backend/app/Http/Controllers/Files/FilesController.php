@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\File;
 
@@ -15,7 +16,7 @@ class FilesController extends Controller
     {
         foreach($request as $key => $value)
         {
-            if (empty($value)){
+            if (!$value ){
                 echo "This value is " . $value;
                 return false;
             }
@@ -42,6 +43,7 @@ class FilesController extends Controller
             ];
         if(!$this->validate($file_param))
         {
+            echo json_encode($file_param);
             return response()->json([
                 "message"=> "All fields are required"
             ],400);
@@ -54,10 +56,17 @@ class FilesController extends Controller
             "file"=> $new_file
         ],200); 
     }
+    public function get_collaborating_files(){
 
+    }
    public function get_all_files(){
     $user = auth()->user(); // TODO
-    $user_files = File::where('owner_id', $user->id)->get();
+    $user_files= DB::table('files as f')
+                    -> leftJoin('collaborations as c', 'f.id','=','c.file_id')
+                    ->select('f.*', 'c.collaborator_type')
+                    ->where('f.owner_id','=',$user->id)
+                    -> orWhere('c.collaborator_id','=',$user->id)
+                    -> get();
     if(!$user_files)
     {
         return response()->json([
@@ -66,11 +75,11 @@ class FilesController extends Controller
     }
     foreach($user_files as $key => $file)
         {
-            $user_files[$key]["content"]=Storage::get($user_files[$key]["path"]);
+            $file->content=Storage::get($file->path);
         }
     return response()->json([
         "message"=>"Files retrieved successfully",
-        "user_files"=> $user_files
+        "user_files"=> json_encode($user_files)
     ],200);
    }
 
