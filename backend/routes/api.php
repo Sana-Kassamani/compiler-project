@@ -17,7 +17,7 @@ Route::middleware(JWTMiddleware::class)->group(function () {
     Route::prefix("/file")->group(function() {
         Route::get("/", [FilesController::class, "get_all_files"]);
         Route::post("/", [FilesController::class, "create_file"]);
-        Route::put("/", [FilesController::class, "save_file"]);
+        Route::post("/save", [FilesController::class, "save_file"]);
         Route::delete("/{id}", [FilesController::class, "delete_file"]);
       });
       
