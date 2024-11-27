@@ -7,7 +7,7 @@ const LanguageSelector = ({ language, onSelect }) => {
   return (
     <div className="selector">
         <Menu>
-            <MenuButton className="menu-button">
+            <MenuButton className="menu-button menu-button-language">
                 {language}
             </MenuButton>
             <MenuList className="menu-list">

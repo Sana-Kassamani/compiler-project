@@ -9,8 +9,8 @@
 }
 
 .menu-button {
-    background-color: #edf2f7;
-    color: #2d3748;
+    background-color: #2d3748;
+    color: #edf2f7;
     padding: 10px 20px;
     border-radius: 8px;
     font-size: 15px;
@@ -21,6 +21,15 @@
 }
 
 .menu-button:hover {
+    background-color: #4a5568;
+}
+
+.menu-button-language{
+    background-color: #edf2f7;
+    color: #2d3748;
+}
+
+.menu-button-language:hover{
     background-color: #8ca0c3;
 }
 
