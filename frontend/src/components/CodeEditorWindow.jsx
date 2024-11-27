@@ -70,6 +70,24 @@ const CodeEditorWindow = () => {
         closeFileDialog();
     }
 
+    // open invite dialog
+    const openIvitingDialog = () =>{
+        setopenInviteDialog(true);
+    }
+
+    // close invite dialog
+    const closeInviteDialog = () =>{
+        setopenInviteDialog(false);
+    }
+
+    const sendInvite = (email) => {
+
+        // (Aref)
+        // send invite
+
+        closeInviteDialog();
+    }
+
     useEffect(() => {
         const savedTheme = localStorage.getItem("editorTheme");
         if (savedTheme) {
@@ -117,6 +135,7 @@ const CodeEditorWindow = () => {
 
             {/* the button to be changed, it is only to try to open the dialog*/}
             <button onClick={openFileDialog}>Hello</button>
+            <button onClick={openIvitingDialog}>Invite</button>
 
             {openCreateFileDialog && (
                 <CreateFileDialog
@@ -124,6 +143,14 @@ const CodeEditorWindow = () => {
                     onCreate={createFile}
                 />
             )}
+
+            {openInviteDialog && (
+                <InviteDialog
+                    onClose={closeInviteDialog}
+                    onInvite={sendInvite}
+                />
+            )}
+
         </div>
     );
 };

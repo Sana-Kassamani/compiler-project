@@ -4,12 +4,16 @@ import "../styles/dialog.css"
 const InviteDialog = ({onClose, onInvite}) => {
 
     const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
 
     const handleInvite = () => {
-        if (email.trim() === "") {
-            alert("Please enter a valid email address.");
+        const emailRegex = /^(?=.*[a-z])(?=.*\W).{12,}$/;
+        
+        if (email.trim() === "" || !emailRegex.test(email)) {
+            setError("Please enter a valid email address.");
             return;
         }
+
         onInvite(email);
     }
 
@@ -29,6 +33,8 @@ const InviteDialog = ({onClose, onInvite}) => {
               <button className="close-dialog" onClick={onClose}>Close</button>
               <button className="invite-button" onClick={handleInvite}>Invite</button>
             </div>
+
+            {error && <p className="error">{error}</p>}
           </div>
         </dialog>
     );
