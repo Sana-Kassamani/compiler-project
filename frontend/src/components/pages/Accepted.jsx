@@ -7,6 +7,7 @@ const Accepted = () => {
     <div className='accepted'>
         <img src={Check} alt="Accepted" />
         <h1>Invitation Accepted</h1>
+        <button>Login</button>
     </div>
   )
 }

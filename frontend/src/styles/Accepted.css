@@ -14,3 +14,14 @@
     background-color: #fff;
     border-radius: 500px;
 }
+
+.accepted button{
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #699F4C;
+    border-radius: 10px;
+    cursor: pointer;
+}
