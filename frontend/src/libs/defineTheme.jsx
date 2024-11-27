@@ -16,7 +16,7 @@ const monacoThemes = {
   dreamweaver: "Dreamweaver",
   eiffel: "Eiffel",
   "espresso-libre": "Espresso Libre",
-  github: "GitHub",
+  // github: "GitHub",
   idle: "IDLE",
   katzenmilch: "Katzenmilch",
   "kuroir-theme": "Kuroir Theme",
@@ -51,8 +51,8 @@ const monacoThemes = {
   monoindustrial: "monoindustrial",
   dracula: "Dracula",
   cobalt2: "Cobalt2",
-  "github-dark": "GitHub Dark",
-  "github-light": "GitHub Light",
+  // "github-dark": "GitHub Dark",
+  // "github-light": "GitHub Light",
   nord: "Nord",
 };
 
