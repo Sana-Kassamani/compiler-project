@@ -13,7 +13,7 @@ Route::get('unauthorized', [JWTAuthController::class, 'unauthorized'])->name("un
 
 Route::middleware(JWTMiddleware::class)->group(function () {
     Route::get('user', [JWTAuthController::class, 'getUser']);
-    Route::post('logout', [JWTAuthController::class, 'logout']);
+    Route::get('logout', [JWTAuthController::class, 'logout']);
     Route::prefix("/file")->group(function() {
         Route::get("/", [FilesController::class, "get_all_files"]);
         Route::post("/", [FilesController::class, "create_file"]);
