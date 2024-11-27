@@ -63,7 +63,6 @@ const CodeEditorWindow = () => {
     // create the file
     const createFile = () => {
         // (Sana)
-        // handle if no input in the file name
         // create the file
         // before adding the file to the db put the extension with the file in the db using the LanguageExtensions constant
 
