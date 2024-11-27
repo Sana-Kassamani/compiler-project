@@ -20,7 +20,9 @@ const CreateFileDialog = () => {
               </div>
               <div className="detail-item">
                 <label>Select Language:</label>
-                <LanguageSelector language={language} onSelect={onSelect} className="languageSelector"/>
+                <div className="language-input">
+                  <LanguageSelector language={language} onSelect={onSelect} className="languageSelector"/>
+                </div>
               </div>
             </div>
             <div className="dialog-buttons">  
