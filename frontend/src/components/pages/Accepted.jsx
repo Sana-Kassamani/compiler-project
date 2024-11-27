@@ -4,7 +4,7 @@ import '../../styles/Accepted.css'
 
 const Accepted = () => {
   return (
-    <div>
+    <div className='accepted'>
         <img src={Check} alt="Accepted" />
         <h1>Invitation Accepted</h1>
     </div>

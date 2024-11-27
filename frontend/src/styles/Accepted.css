@@ -1,0 +1,16 @@
+.accepted{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    background-color: #24292e;
+    width: 100%;
+    height: 100vh;
+}
+
+.accepted img{
+    width: 200px;
+    background-color: #fff;
+    border-radius: 500px;
+}
