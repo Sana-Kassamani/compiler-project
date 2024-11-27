@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import emailjs from "@emailjs/browser";
+import {requestApi} from '../utils/request'
 import "../styles/editor.css";
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
@@ -54,6 +55,17 @@ const CodeEditorWindow = () => {
     }, 'j9bxn6hYnwUkTqR9o');
   };
 
+  const handleAnalyze = async () => {
+    const result = await requestApi({
+      route: '/analyze',
+      body:{
+        'code' : value
+      },
+      method: 'POST'
+    })
+    console.log(result.message)
+  }
+
   const handleLogout = () =>{
     
   }
@@ -65,8 +77,8 @@ const CodeEditorWindow = () => {
       setTheme(parsedTheme);
       defineTheme(parsedTheme.value);
     } else {
-      defineTheme("githubdark").then((_) =>
-        setTheme({ value: "Github Dark", label: "Github Dark" })
+      defineTheme("acive4d").then((_) =>
+        setTheme({ value: "Acive4D", label: "Acive4D" })
       );
     }
   }, []);
@@ -82,7 +94,7 @@ const CodeEditorWindow = () => {
               handleThemeChange={handleThemeChange}
             />
           </div>
-          <button className="ai-button selector" onClick={()=>{console.log(value)}}>
+          <button className="ai-button selector" onClick={handleAnalyze}>
             Analyze Code
           </button>
         </div>
@@ -106,7 +118,7 @@ const CodeEditorWindow = () => {
         <div className="logout">
           <button onClick={handleLogout}>Log Out</button>
         </div>
-        <Output editorRef={editorRef} language={language} />
+        <Output editorRef={editorRef} language={language} value={value}/>
       </div>
     </div>
   );
