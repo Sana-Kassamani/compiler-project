@@ -52,10 +52,6 @@ const FilesProvider = ({ children }) => {
       console.log(error.response.data.message);
     }
   };
-  //   const getFileContent = (id) => {
-  //     {
-
-  //     }
 
   const saveFile = async (form) => {
     try {
@@ -88,6 +84,21 @@ const FilesProvider = ({ children }) => {
     }
   };
 
+  const getContributors = async (fileId) => {
+    try {
+      const response = await request({
+        route: `/file/${fileId}`,
+      });
+      console.log(response);
+      if (response.status === 200) {
+        setFiles(response.data.user_files);
+      } else {
+        console.log(response.data.message);
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
   //   const deleteFile = (id) => {
   //     axios.delete("http://127.0.0.1:8000/api/courses").then(({ data }) => {
   //       setCourses(data.courses);
