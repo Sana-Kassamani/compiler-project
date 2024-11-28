@@ -86,7 +86,7 @@ const FilesProvider = ({ children }) => {
       });
       console.log(response);
       if (response.status === 200) {
-        setContributors(response.data.collaborators);
+        setContributors(response.data);
         console.log("collaborators are", response.data.collaborators);
       } else {
         console.log(response.data.message);
