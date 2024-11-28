@@ -63,7 +63,7 @@ class FilesController extends Controller
         }
         //SELECT * from collaborations as c INNER join users as u on c.collaborator_id = u.id where file_id = 13;
         $collaborators = DB::table('collaborations as c')
-                        -> innerJoin('users as u','c.collaborator_id','=','u.id')
+                        -> join('users as u','c.collaborator_id','=','u.id')
                         ->where('c.file_id','=',$id)
                         -> get();
         if(!$collaborators)
