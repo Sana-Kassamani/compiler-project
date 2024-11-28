@@ -122,18 +122,6 @@ const CodeEditorWindow = () => {
   };
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("editorTheme");
-    if (savedTheme) {
-      const parsedTheme = JSON.parse(savedTheme);
-      setTheme(parsedTheme);
-      defineTheme(parsedTheme.value);
-    } else {
-      defineTheme("acive4d").then((_) =>
-        setTheme({ value: "Acive4D", label: "Acive4D" })
-      );
-    }
-  }, []);
-  useEffect(() => {
     const currentFile = list[selectedFile];
     console.log(currentFile, typeof currentFile);
     if (currentFile) {
@@ -148,6 +136,7 @@ const CodeEditorWindow = () => {
       }
     }
   }, [selectedFile]);
+  
   useEffect(() => {
     getFiles();
   }, []);
