@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Invitation;
 use Illuminate\Support\Facades\DB;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class EmailController extends Controller
 {
     public function invite(Request $request){
-        $user = DB::table('users')->where('email', $request->invited)->first();
+        $user = User::where('email', $request->invited)->first();
 
         if(!$user){
             return response()->json([

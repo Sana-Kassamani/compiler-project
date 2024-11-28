@@ -1,19 +1,13 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Editor from "@monaco-editor/react";
-import LanguageSelector from "./LanguageSelector";
 import "../styles/editor.css";
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
 import Output from "./Output";
-import TerminalWindow from "./TerminalWindow";
-import CreateFileDialog from "./CreateFileDialog";
-import InviteDialog from "./InviteDialog";
 import SideBar from "../components/SideBar";
 import { fileContext } from "../context/fileContext";
 import { request } from "../utils/request";
-import Pusher from "pusher-js";
-import axios from "axios";
 import socket from "../config/socket";
 
 const CodeEditorWindow = () => {
@@ -28,44 +22,50 @@ const CodeEditorWindow = () => {
   const [language, setLanguage] = useState("javascript");
   const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
   const navigate = useNavigate();
-  // localStorage.setItem("editorTheme", JSON.stringify(theme));
-
+  
   useEffect(() => { 
     const currentFile = list[selectedFile]; 
-    if (currentFile) { setValue(currentFile.content); } 
+    if (currentFile) { 
+      socket.emit('file.select', currentFile.id); 
+    } 
   }, [selectedFile]); 
   
   useEffect(() => { 
     if (selectedFile !== null) { 
+      socket.on('file.content', (data) => { 
+        if (data.fileId === list[selectedFile]?.id) { 
+          setValue(data.content); 
+        } 
+      }); 
+
       socket.on('code.update', (data) => { 
-        setValue(data.code); }); 
+        if (data.fileId === list[selectedFile]?.id) { 
+          setValue(data.code); 
+        } 
+      }); 
+
       socket.on('connect_error', (err) => { 
         console.log('Socket.IO error:', err); 
       }); 
-      } 
-    }, [selectedFile]); 
+    } 
+    return () => { 
+      socket.off('file.content'); 
+      socket.off('code.update'); 
+    }; 
+  }, [selectedFile]); 
     
   const handleEditorChange = (value) => { 
     setValue(value); 
     socket.emit('code.update', { code: value, fileId: list[selectedFile].id }); 
   };
   
-  // set focus on tthe compiler
   const onMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
   };
 
-  // select language
-  const onSelect = (language) => {
-    setLanguage(language);
-  };
-
-  // handle theme change
   const handleThemeChange = (th) => {
     const theme = th;
-    console.log("theme...", theme);
-    console.log(theme);
     if (["light", "vs-dark"].includes(theme.value)) {
       setTheme(theme);
       localStorage.setItem("editorTheme", JSON.stringify(theme));
@@ -93,12 +93,9 @@ const CodeEditorWindow = () => {
       const response = await request({
         route: "logout",
       });
-      console.log(response);
       if (response.status === 200) {
         localStorage.removeItem("token");
         navigate("/");
-      } else {
-        console.log(response.data.message);
       }
     } catch (error) {
       console.log(error.response.data.message);
@@ -111,8 +108,6 @@ const CodeEditorWindow = () => {
       type: "text/plain",
     });
     const form = new FormData();
-    console.log("id", list[selectedFile].id);
-    console.log("file", file);
     form.append("id", list[selectedFile].id);
     form.append("file", file);
     saveFile(form);
@@ -120,7 +115,6 @@ const CodeEditorWindow = () => {
 
   useEffect(() => {
     const currentFile = list[selectedFile];
-    console.log(currentFile, typeof currentFile);
     if (currentFile) {
       currentFile.content
         ? setValue(currentFile.content)
