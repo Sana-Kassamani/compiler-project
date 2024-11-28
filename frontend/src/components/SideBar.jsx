@@ -5,15 +5,16 @@ import Python from "../assets/Python.png";
 import "../styles/SideBar.css";
 import { fileContext } from "../context/fileContext";
 import CreateFileDialog from "./CreateFileDialog";
+import { LanguageExtensions } from "../constants/LanguageExtensions";
 
 const SideBar = () => {
   const { list, createFile, setSelectedFile } = useContext(fileContext);
 
   console.log("Type of list is", typeof list);
   console.log(list);
-  const createEmptyFile = () => {
+  const createEmptyFile = (fileName, language) => {
     const blob = new Blob([""], { type: "text/plain" });
-    const file = new File([blob], "emptyFile.txt", { type: "text/plain" });
+    const file = new File([blob], fileName, { type: "text/plain" });
     return file;
   };
   const [openCreateFileDialog, setopenCreateFileDialog] = useState(false);
@@ -29,11 +30,14 @@ const SideBar = () => {
   };
 
   // create the file
-  const createFileSecond = (fileName, language) => {
-    // (Sana)
-    // create the file
-    // before adding the file to the db put the extension with the file in the db using the LanguageExtensions constant
-
+  const createNewFile = (fileName, language) => {
+    const ext = LanguageExtensions[language];
+    const filenameInDb = `${fileName}${ext}`;
+    const form = new FormData();
+    form.append("filename", filenameInDb);
+    form.append("language", language);
+    form.append("file", createEmptyFile(filenameInDb, language));
+    createFile(form);
     closeFileDialog();
   };
 
@@ -42,16 +46,7 @@ const SideBar = () => {
       <div className="files">
         <div className="files-title">
           <h2>Files</h2>
-          <button
-            onClick={() => {
-              const form = new FormData();
-              form.append("filename", "newFileFromFE");
-              form.append("language", "python");
-              form.append("file", createEmptyFile());
-              createFile(form);
-            }}
-            // onClick={openFileDialog}
-          >
+          <button onClick={openFileDialog}>
             <img src={Plus} alt="Add File" />
           </button>
         </div>
@@ -80,7 +75,7 @@ const SideBar = () => {
       </div>
 
       {openCreateFileDialog && (
-        <CreateFileDialog onClose={closeFileDialog} onCreate={createFile} />
+        <CreateFileDialog onClose={closeFileDialog} onCreate={createNewFile} />
       )}
     </div>
   );

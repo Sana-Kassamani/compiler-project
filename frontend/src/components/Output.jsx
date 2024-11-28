@@ -36,7 +36,7 @@ const Output = ({ editorRef, language, value }) => {
       },
       method: "POST",
     });
-    console.log(result.message);
+    console.log(result.data.message);
   };
 
   return (
