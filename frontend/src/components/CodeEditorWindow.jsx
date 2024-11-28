@@ -30,6 +30,8 @@ const CodeEditorWindow = () => {
   // handle value in the editor
   const handleEditorChange = (value) => {
     setValue(value);
+    broadcastChange(value);
+    console.log(value, typeof value);
   };
 
   // set focus on tthe compiler
@@ -37,16 +39,7 @@ const CodeEditorWindow = () => {
     editorRef.current = editor;
     editor.focus();
   };
-  // set focus on tthe compiler
-  const onMount = (editor) => {
-    editorRef.current = editor;
-    editor.focus();
-  };
 
-  // select language
-  const onSelect = (language) => {
-    setLanguage(language);
-  };
   // select language
   const onSelect = (language) => {
     setLanguage(language);
@@ -158,6 +151,58 @@ const CodeEditorWindow = () => {
   useEffect(() => {
     getFiles();
   }, []);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("editorTheme");
+    if (savedTheme) {
+      const parsedTheme = JSON.parse(savedTheme);
+      setTheme(parsedTheme);
+      defineTheme(parsedTheme.value);
+    } else {
+      defineTheme("active4d").then((_) =>
+        setTheme({ value: "active4d", label: "Active4D" })
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    // Enable pusher logging - don't include this in production
+    // Pusher.logToConsole = true;
+
+    const pusher = new Pusher("38a7faf7510acaec457c", {
+      cluster: "ap2",
+    });
+
+    const channel = pusher.subscribe("document");
+    // channel.bind("code", function (data) {
+    //   setValue(data);
+    // });
+    channel.bind("DocumentUpdated", (data) => {
+      console.log("Received update from Pusher:", data.content, typeof content);
+      //   setValue(data);
+      console.log("Socket is", echo.socketId());
+      console.log(data);
+      //   if (data.content !== value) {
+      //     setValue(data.content);
+      //   }
+      if (data.socket_id !== echo.socketId()) {
+        console.log("socket id is:", data.socket_id);
+        console.log("Received update from Pusher:", data.content);
+        setValue(data.content);
+      } else {
+        console.log("Ignoring event from the current user.");
+      }
+    });
+  }, []);
+  const broadcastChange = async (updatedContent) => {
+    console.log("Broadcasting change:", updatedContent);
+    console.log("------------", axios.defaults);
+    axios.defaults.headers.common["X-Socket-Id"] = echo.socketId();
+    await axios.post("http://127.0.0.1:8000/api/document/update", {
+      content: updatedContent,
+      socket_id: echo.socketId(),
+    });
+  };
 
   return (
     <div className="window">
