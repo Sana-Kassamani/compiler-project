@@ -135,6 +135,7 @@ const CodeEditorWindow = () => {
       currentFile.content
         ? setValue(currentFile.content)
         : setValue("// some comment");
+      setLanguage(currentFile.language);
       if (
         !currentFile.shared ||
         (currentFile.shared && currentFile.type === "editor")
