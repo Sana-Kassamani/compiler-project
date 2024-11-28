@@ -13,6 +13,9 @@ import InviteDialog from "./InviteDialog";
 import SideBar from "../components/SideBar";
 import { fileContext } from "../context/fileContext";
 import { request } from "../utils/request";
+import Pusher from "pusher-js";
+import echo from "../config/echo";
+import axios from "axios";
 
 const CodeEditorWindow = () => {
   const { selectedFile, list, saveFile, getFiles } = useContext(fileContext);
@@ -34,7 +37,16 @@ const CodeEditorWindow = () => {
     editorRef.current = editor;
     editor.focus();
   };
+  // set focus on tthe compiler
+  const onMount = (editor) => {
+    editorRef.current = editor;
+    editor.focus();
+  };
 
+  // select language
+  const onSelect = (language) => {
+    setLanguage(language);
+  };
   // select language
   const onSelect = (language) => {
     setLanguage(language);

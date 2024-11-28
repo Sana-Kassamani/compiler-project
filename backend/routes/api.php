@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\JWTAuthController;
 use App\Http\Controllers\Files\FilesController;
+use App\Http\Controllers\Collaboration\DocumentController;
 use App\Http\Middleware\JWTMiddleware;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\AiController;
