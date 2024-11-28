@@ -28,7 +28,7 @@ Route::middleware(JWTMiddleware::class)->group(function () {
       });
       
 });
-
+Route::post('/document/update', [DocumentController::class, 'update']);
 
 // Route::get('user', [JWTAuthController::class, 'getUser'])->middleware(JWTMiddleware::class);
 // Route::post('logout', [JWTAuthController::class, 'logout'])->middleware(JWTMiddleware::class);
