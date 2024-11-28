@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import FileComp from "../components/File";
 import Plus from "../assets/plus.svg";
 import Python from "../assets/Python.png";
+import fileImg from "../assets/file.png";
 import "../styles/SideBar.css";
 import { fileContext } from "../context/fileContext";
 import CreateFileDialog from "./CreateFileDialog";
@@ -52,15 +53,7 @@ const SideBar = () => {
         </div>
         <div className="file-list">
           {list.map((f, index) => (
-            <FileComp
-              key={index}
-              index={index}
-              file={f}
-              type={Python}
-              // name={f.filename}
-              // shared={f.shared}
-              // userType={f.type}
-            />
+            <FileComp key={index} index={index} file={f} type={fileImg} />
           ))}
         </div>
       </div>

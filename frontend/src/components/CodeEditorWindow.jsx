@@ -16,6 +16,7 @@ import { request } from "../utils/request";
 const CodeEditorWindow = () => {
   const { selectedFile, list, saveFile, getFiles, getContributors } =
     useContext(fileContext);
+
   const [readOnly, setReadOnly] = useState(true);
   const [defaultCode, setDefaultCode] = useState("Select a file to edit code");
   const [value, setValue] = useState("");
@@ -24,7 +25,7 @@ const CodeEditorWindow = () => {
   const [language, setLanguage] = useState("javascript");
   const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
   const navigate = useNavigate();
-
+  // localStorage.setItem("editorTheme", JSON.stringify(theme));
   // handle value in the editor
   const handleEditorChange = (value) => {
     setValue(value);
@@ -97,18 +98,18 @@ const CodeEditorWindow = () => {
     saveFile(form);
   };
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("editorTheme");
-    if (savedTheme) {
-      const parsedTheme = JSON.parse(savedTheme);
-      setTheme(parsedTheme);
-      defineTheme(parsedTheme.value);
-    } else {
-      defineTheme("acive4d").then((_) =>
-        setTheme({ value: "Acive4D", label: "Acive4D" })
-      );
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedTheme = localStorage.getItem("editorTheme");
+  //   if (savedTheme) {
+  //     const parsedTheme = JSON.parse(savedTheme);
+  //     setTheme(parsedTheme);
+  //     defineTheme(parsedTheme.value);
+  //   } else {
+  //     defineTheme("acive4d").then((_) =>
+  //       setTheme({ value: "acive4d", label: "Acive4D" })
+  //     );
+  //   }
+  // }, []);
   useEffect(() => {
     const currentFile = list[selectedFile];
     console.log(currentFile, typeof currentFile);

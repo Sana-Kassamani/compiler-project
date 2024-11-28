@@ -1,98 +1,99 @@
 .selector {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .text {
-    margin-bottom: 8px;
-    font-size: 15px;
-    color: gray;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: gray;
 }
 
-.menu-button, .ai-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background-color: #2d3748;
-    color: #edf2f7;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.menu-button,
+.ai-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: #2d3748;
+  color: #edf2f7;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.ai-button{
-    background-color: #2C0E69;
+.ai-button {
+  background-color: #2c0e69;
 }
 
 .menu-button:hover {
-    background-color: #4a5568;
+  background-color: #4a5568;
 }
 
-.menu-button-language{
-    background-color: #edf2f7;
-    color: #2d3748;
+.menu-button-language {
+  background-color: #edf2f7;
+  color: #2d3748;
 }
 
-.menu-button-language:hover{
-    background-color: #8ca0c3;
+.menu-button-language:hover {
+  background-color: #8ca0c3;
 }
 
 .menu-list {
-    z-index: 1000;
-    height: 200px;
-    overflow-y: scroll;
-    background-color: #110c1b;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  height: 200px;
+  overflow-y: scroll;
+  background-color: #110c1b;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .menu-list::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .menu-list::-webkit-scrollbar-track {
-    background-color: #110c1b;
-    border-radius: 8px;
+  background-color: #110c1b;
+  border-radius: 8px;
 }
 
 .menu-list::-webkit-scrollbar-thumb {
-    background-color: #444;
-    border-radius: 8px;
+  background-color: #444;
+  border-radius: 8px;
 }
 
 .menu-list::-webkit-scrollbar-thumb:hover {
-    background-color: #1e90ff;
+  background-color: #1e90ff;
 }
 
 .menu-item {
-    padding: 8px 16px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
+  padding: 8px 16px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .menu-item:hover {
-    background-color: #444;
-    color: #1e90ff;
+  background-color: #444;
+  color: #1e90ff;
 }
 
 .menu-item.active {
-    background-color: #2d2d2d;
-    color: #1e90ff;
+  background-color: #2d2d2d;
+  color: #1e90ff;
 }
 
 .version {
-    color: #b0b0b0;
-    font-size: 12px;
-    margin-left: 10px;
+  color: #b0b0b0;
+  font-size: 12px;
+  margin-left: 10px;
 }
 
 .version:hover {
-    color: #1e90ff;
+  color: #1e90ff;
 }
