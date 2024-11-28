@@ -51,8 +51,9 @@ const monacoThemes = {
   monoindustrial: "monoindustrial",
   dracula: "Dracula",
   cobalt2: "Cobalt2",
-  // "github-dark": "GitHub Dark",
-  // "github-light": "GitHub Light",
+  "github-dark": "GitHub Dark",
+  "github-light": "GitHub Light",
+  github : "GitHub",
   nord: "Nord",
 };
 
