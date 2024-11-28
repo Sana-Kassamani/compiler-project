@@ -10,16 +10,14 @@ const io = socketIo(server, {
     }
 });
 
-const userFiles = {}; // To keep track of each user's selected file
-const fileContents = {}; // To keep track of the current content of each file
+const userFiles = {};
+const fileContents = {};
 
 io.on('connection', (socket) => {
     console.log('New client connected');
     
-    // Track the selected file for each user
     socket.on('file.select', (fileId) => {
         userFiles[socket.id] = fileId;
-        // Send the current content of the selected file to the user
         socket.emit('file.content', { fileId: fileId, content: fileContents[fileId] });
     });
     
