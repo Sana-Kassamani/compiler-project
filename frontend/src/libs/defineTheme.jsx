@@ -16,7 +16,6 @@ const monacoThemes = {
   dreamweaver: "Dreamweaver",
   eiffel: "Eiffel",
   "espresso-libre": "Espresso Libre",
-  github: "GitHub",
   idle: "IDLE",
   katzenmilch: "Katzenmilch",
   "kuroir-theme": "Kuroir Theme",

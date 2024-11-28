@@ -36,6 +36,7 @@ const Output = ({ editorRef, language, value, analyzeResult }) => {
       },
       method: "POST",
     });
+    console.log(result.data.message);
     setOutput([result.data.message]);
   };
 

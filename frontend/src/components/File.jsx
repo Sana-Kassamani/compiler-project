@@ -5,7 +5,7 @@ import InviteDialog from "./InviteDialog";
 import { fileContext } from "../context/fileContext";
 import { request } from "../utils/request";
 
-const File = ({ type, name, shared, userType, file, index }) => {
+const File = ({ type, file, index }) => {
   const { setSelectedFile } = useContext(fileContext);
   const [openInviteDialog, setOpenInviteDialog] = useState(false);
 
