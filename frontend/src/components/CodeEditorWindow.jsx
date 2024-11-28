@@ -18,6 +18,7 @@ const CodeEditorWindow = () => {
   const [readOnly, setReadOnly] = useState(true);
   const [defaultCode, setDefaultCode] = useState("Select a file to edit code");
   const [value, setValue] = useState("");
+  const [analyzeResult, setAnalyzeResult] = useState([]);
   const editorRef = useRef();
   const [language, setLanguage] = useState("javascript");
   const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
@@ -65,8 +66,7 @@ const CodeEditorWindow = () => {
       },
       method: "POST",
     });
-    console.log(result);
-    console.log(result.data.message);
+    setAnalyzeResult([result.data.message]);
   };
 
   const handleLogout = async () => {
@@ -141,7 +141,7 @@ const CodeEditorWindow = () => {
               handleThemeChange={handleThemeChange}
             />
           </div>
-          {selectedFile !== null && <button onClick={handleSave}>Save</button>}
+          {selectedFile !== null && <button className="save-btn" onClick={handleSave}>Save</button>}
           <button className="ai-button selector" onClick={handleAnalyze}>
             Analyze Code
           </button>
@@ -167,7 +167,7 @@ const CodeEditorWindow = () => {
         <div className="logout">
           <button onClick={handleLogout}>Log Out</button>
         </div>
-        <Output editorRef={editorRef} language={language} />
+        <Output editorRef={editorRef} language={language} value={value} analyzeResult={analyzeResult}/>
       </div>
     </div>
   );

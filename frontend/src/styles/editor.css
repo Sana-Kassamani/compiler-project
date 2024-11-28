@@ -45,7 +45,7 @@
     justify-content: flex-end;
 }
 
-.logout button{
+.logout button, .save-btn{
     border: none;
     background-color: #2D3748;
     color: #fff;

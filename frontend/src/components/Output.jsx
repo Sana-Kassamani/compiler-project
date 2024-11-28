@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import executeCode from "../utils/executeCode";
 import "../styles/output.css";
 import { languageOptions } from "../constants/LanguageOptions";
 import { request } from "../utils/request";
 import Bug from "../assets/bug-off.svg";
 
-const Output = ({ editorRef, language, value }) => {
+const Output = ({ editorRef, language, value, analyzeResult }) => {
   const [output, setOutput] = useState(null);
   const [isloading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -36,8 +36,12 @@ const Output = ({ editorRef, language, value }) => {
       },
       method: "POST",
     });
-    console.log(result.message);
+    setOutput([result.data.message]);
   };
+
+  useEffect(()=> {
+    setOutput(analyzeResult);
+  }, [analyzeResult]);
 
   return (
     <div className="output-container">
