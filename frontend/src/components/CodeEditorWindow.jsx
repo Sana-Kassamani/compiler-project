@@ -39,9 +39,9 @@ const CodeEditorWindow = () => {
     if (selectedFile !== null) { 
       socket.on('code.update', (data) => { 
         setValue(data.code); }); 
-        socket.on('connect_error', (err) => { 
-          console.log('Socket.IO error:', err); 
-        }); 
+      socket.on('connect_error', (err) => { 
+        console.log('Socket.IO error:', err); 
+      }); 
       } 
     }, [selectedFile]); 
     
