@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/base/base.css";
 import "../../styles/Login.css";
 import Password from "../Password";
 import { request } from "./../../utils/request";

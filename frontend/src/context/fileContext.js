@@ -94,15 +94,12 @@ const FilesProvider = ({ children }) => {
   //     });
   //   };
 
-  useEffect(() => {
-    getFiles();
-  }, []);
-
   return (
     <fileContext.Provider
       value={{
         selectedFile: selectedFile,
         list: files,
+        getFiles,
         setSelectedFile,
         createFile,
         saveFile,

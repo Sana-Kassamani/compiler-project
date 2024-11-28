@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/base/base.css";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import emailjs from "@emailjs/browser";
-import { requestApi } from "../utils/request";
 import "../styles/editor.css";
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
@@ -17,7 +15,7 @@ import { fileContext } from "../context/fileContext";
 import { request } from "../utils/request";
 
 const CodeEditorWindow = () => {
-  const { selectedFile, list, saveFile } = useContext(fileContext);
+  const { selectedFile, list, saveFile, getFiles } = useContext(fileContext);
   const [readOnly, setReadOnly] = useState(true);
   const [defaultCode, setDefaultCode] = useState("Select a file to edit code");
   const [value, setValue] = useState("");
@@ -59,7 +57,7 @@ const CodeEditorWindow = () => {
   };
 
   const handleEmail = async (from, to, email) => {
-    const result = await requestApi({
+    const result = await request({
       route: "/invite",
       body: {},
     });
@@ -78,14 +76,15 @@ const CodeEditorWindow = () => {
   };
 
   const handleAnalyze = async () => {
-    const result = await requestApi({
+    const result = await request({
       route: "/analyze",
       body: {
         code: value,
       },
       method: "POST",
     });
-    console.log(result.message);
+    console.log(result);
+    console.log(result.data.message);
   };
 
   const handleLogout = async () => {
@@ -144,6 +143,9 @@ const CodeEditorWindow = () => {
       }
     }
   }, [selectedFile]);
+  useEffect(() => {
+    getFiles();
+  }, []);
 
   return (
     <div className="window">
@@ -157,7 +159,7 @@ const CodeEditorWindow = () => {
             />
           </div>
           {selectedFile !== null && <button onClick={handleSave}>Save</button>}
-          <button className="ai-button selector" onClick={console.log("Hello")}>
+          <button className="ai-button selector" onClick={handleAnalyze}>
             Analyze Code
           </button>
         </div>

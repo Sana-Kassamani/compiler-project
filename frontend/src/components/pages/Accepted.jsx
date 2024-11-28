@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { requestApi } from "../../utils/request";
+import { request } from "../../utils/request";
 import Check from "../../assets/check.svg";
 import "../../styles/Accepted.css";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ const Accepted = () => {
   };
 
   const acceptInvitation = async () => {
-    const result = await requestApi({
+    const result = await request({
       route: "/accept",
       method: "PUT",
     });

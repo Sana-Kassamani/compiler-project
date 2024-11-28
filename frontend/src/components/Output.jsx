@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import executeCode from "../utils/executeCode";
 import "../styles/output.css";
 import { languageOptions } from "../constants/LanguageOptions";
-import { requestApi } from "../utils/request";
+import { request } from "../utils/request";
 import Bug from "../assets/bug-off.svg";
 
 const Output = ({ editorRef, language, value }) => {
@@ -29,7 +29,7 @@ const Output = ({ editorRef, language, value }) => {
   };
 
   const handleDebug = async () => {
-    const result = await requestApi({
+    const result = await request({
       route: "/debug",
       body: {
         code: value,

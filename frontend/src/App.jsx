@@ -10,10 +10,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
+        </Routes>
         <FilesProvider>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/Register" element={<Register />} />
             <Route path="/Home" element={<CodeEditorWindow />} />
             <Route path="/Accepted" element={<Accepted />} />
           </Routes>
