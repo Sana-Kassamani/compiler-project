@@ -24,9 +24,11 @@ const CodeEditorWindow = () => {
   const navigate = useNavigate();
   
   useEffect(() => { 
+    getFiles();
     const currentFile = list[selectedFile]; 
     if (currentFile) { 
       socket.emit('file.select', currentFile.id); 
+      setValue(currentFile.content || defaultCode);
     } 
   }, [selectedFile]); 
   
