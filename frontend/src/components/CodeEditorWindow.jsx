@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
-import emailjs from "@emailjs/browser";
 import "../styles/editor.css";
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
@@ -56,24 +55,7 @@ const CodeEditorWindow = () => {
     }
   };
 
-  const handleEmail = async (from, to, email) => {
-    const result = await request({
-      route: "/invite",
-      body: {},
-    });
-    const id = result.id;
-    emailjs.send(
-      "service_sl9j08x",
-      "template_xh85vsl",
-      {
-        from_name: from,
-        to_name: to,
-        to_email: email,
-        id,
-      },
-      "j9bxn6hYnwUkTqR9o"
-    );
-  };
+
 
   const handleAnalyze = async () => {
     const result = await request({
@@ -91,6 +73,7 @@ const CodeEditorWindow = () => {
     try {
       const response = await request({
         route: "logout",
+        method: 'POST'
       });
       console.log(response);
       if (response.status === 200) {
