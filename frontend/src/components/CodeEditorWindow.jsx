@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
-import emailjs from "@emailjs/browser";
 import "../styles/editor.css";
 import { defineTheme } from "../libs/defineTheme";
 import ThemeSelector from "./ThemesSelector";
@@ -19,6 +18,7 @@ const CodeEditorWindow = () => {
   const [readOnly, setReadOnly] = useState(true);
   const [defaultCode, setDefaultCode] = useState("Select a file to edit code");
   const [value, setValue] = useState("");
+  const [analyzeResult, setAnalyzeResult] = useState([]);
   const editorRef = useRef();
   const [language, setLanguage] = useState("javascript");
   const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
@@ -56,24 +56,7 @@ const CodeEditorWindow = () => {
     }
   };
 
-  const handleEmail = async (from, to, email) => {
-    const result = await request({
-      route: "/invite",
-      body: {},
-    });
-    const id = result.id;
-    emailjs.send(
-      "service_sl9j08x",
-      "template_xh85vsl",
-      {
-        from_name: from,
-        to_name: to,
-        to_email: email,
-        id,
-      },
-      "j9bxn6hYnwUkTqR9o"
-    );
-  };
+
 
   const handleAnalyze = async () => {
     const result = await request({
@@ -83,14 +66,14 @@ const CodeEditorWindow = () => {
       },
       method: "POST",
     });
-    console.log(result);
-    console.log(result.data.message);
+    setAnalyzeResult([result.data.message]);
   };
 
   const handleLogout = async () => {
     try {
       const response = await request({
         route: "logout",
+        method: 'POST'
       });
       console.log(response);
       if (response.status === 200) {
@@ -159,7 +142,7 @@ const CodeEditorWindow = () => {
               handleThemeChange={handleThemeChange}
             />
           </div>
-          {selectedFile !== null && <button onClick={handleSave}>Save</button>}
+          {selectedFile !== null && <button className="save-btn" onClick={handleSave}>Save</button>}
           <button className="ai-button selector" onClick={handleAnalyze}>
             Analyze Code
           </button>
@@ -185,7 +168,7 @@ const CodeEditorWindow = () => {
         <div className="logout">
           <button onClick={handleLogout}>Log Out</button>
         </div>
-        <Output editorRef={editorRef} language={language} />
+        <Output editorRef={editorRef} language={language} value={value} analyzeResult={analyzeResult}/>
       </div>
     </div>
   );

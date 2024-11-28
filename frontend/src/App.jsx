@@ -17,7 +17,7 @@ function App() {
         <FilesProvider>
           <Routes>
             <Route path="/Home" element={<CodeEditorWindow />} />
-            <Route path="/Accepted" element={<Accepted />} />
+            <Route path="/Accepted/:id" element={<Accepted />} />
           </Routes>
         </FilesProvider>
       </BrowserRouter>
