@@ -8,7 +8,7 @@ import CreateFileDialog from "./CreateFileDialog";
 import { LanguageExtensions } from "../constants/LanguageExtensions";
 
 const SideBar = () => {
-  const { list, createFile, setSelectedFile } = useContext(fileContext);
+  const { list, createFile, contributors } = useContext(fileContext);
 
   console.log("Type of list is", typeof list);
   console.log(list);
@@ -67,10 +67,16 @@ const SideBar = () => {
       <div className="contributors">
         <h2>Contributors</h2>
         <div className="avatars">
-          <h2>A</h2>
-          <h2>S</h2>
-          <h2>F</h2>
-          <h2>A</h2>
+          {/* {console.log(contributors)} */}
+          {/* {contributors.owner.length > 0 &&
+            contributors.owner?.map((c, index) => (
+              <h4 key={index}>{c.username} Owner</h4>
+            ))} */}
+          {contributors?.map((c, index) => (
+            <h4 key={index}>
+              {c.username} {c.collaborator_type}
+            </h4>
+          ))}
         </div>
       </div>
 

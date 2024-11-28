@@ -6,9 +6,8 @@ import { fileContext } from "../context/fileContext";
 import { request } from "../utils/request";
 
 const File = ({ type, name, shared, userType, file, index }) => {
-  const { list, createFile, setSelectedFile } = useContext(fileContext);
+  const { setSelectedFile } = useContext(fileContext);
   const [openInviteDialog, setOpenInviteDialog] = useState(false);
-  
 
   // open invite dialog
   const openInvitingDialog = () => {
@@ -29,8 +28,9 @@ const File = ({ type, name, shared, userType, file, index }) => {
         file: file.id,
         type: role,
       },
-      method: 'POST'
+      method: "POST",
     });
+    console.log(result.data);
     const id = result.data.new_invitation.id;
     emailjs.send(
       "service_sl9j08x",
@@ -42,8 +42,6 @@ const File = ({ type, name, shared, userType, file, index }) => {
       "j9bxn6hYnwUkTqR9o"
     );
   };
-
-
 
   return (
     <div

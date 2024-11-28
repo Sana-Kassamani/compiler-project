@@ -7,13 +7,8 @@ export const fileContext = createContext();
 
 const FilesProvider = ({ children }) => {
   const [files, setFiles] = useState([]);
+  const [contributors, setContributors] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
-  //   const [filtered, setFiltered] = useState([]);
-
-  //   const handdleFilters = (filters) => {
-  //     // Logic
-  //     setFiltered();
-  //   };
 
   const getFiles = async () => {
     try {
@@ -91,7 +86,8 @@ const FilesProvider = ({ children }) => {
       });
       console.log(response);
       if (response.status === 200) {
-        setFiles(response.data.user_files);
+        setContributors(response.data.collaborators);
+        console.log("collaborators are", response.data.collaborators);
       } else {
         console.log(response.data.message);
       }
@@ -110,10 +106,13 @@ const FilesProvider = ({ children }) => {
       value={{
         selectedFile: selectedFile,
         list: files,
+        contributors: contributors,
         getFiles,
         setSelectedFile,
         createFile,
         saveFile,
+        getContributors,
+
         // editCourse,
         // deleteCourse,
       }}

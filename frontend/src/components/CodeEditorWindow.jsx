@@ -14,7 +14,8 @@ import { fileContext } from "../context/fileContext";
 import { request } from "../utils/request";
 
 const CodeEditorWindow = () => {
-  const { selectedFile, list, saveFile, getFiles } = useContext(fileContext);
+  const { selectedFile, list, saveFile, getFiles, getContributors } =
+    useContext(fileContext);
   const [readOnly, setReadOnly] = useState(true);
   const [defaultCode, setDefaultCode] = useState("Select a file to edit code");
   const [value, setValue] = useState("");
@@ -56,8 +57,6 @@ const CodeEditorWindow = () => {
     }
   };
 
-
-
   const handleAnalyze = async () => {
     const result = await request({
       route: "/analyze",
@@ -73,7 +72,6 @@ const CodeEditorWindow = () => {
     try {
       const response = await request({
         route: "logout",
-        method: 'POST'
       });
       console.log(response);
       if (response.status === 200) {
@@ -125,6 +123,7 @@ const CodeEditorWindow = () => {
       ) {
         setReadOnly(false);
       }
+      getContributors(currentFile.id);
     }
   }, [selectedFile]);
   useEffect(() => {
@@ -142,7 +141,11 @@ const CodeEditorWindow = () => {
               handleThemeChange={handleThemeChange}
             />
           </div>
-          {selectedFile !== null && <button className="save-btn" onClick={handleSave}>Save</button>}
+          {selectedFile !== null && (
+            <button className="save-btn" onClick={handleSave}>
+              Save
+            </button>
+          )}
           <button className="ai-button selector" onClick={handleAnalyze}>
             Analyze Code
           </button>
@@ -168,7 +171,12 @@ const CodeEditorWindow = () => {
         <div className="logout">
           <button onClick={handleLogout}>Log Out</button>
         </div>
-        <Output editorRef={editorRef} language={language} value={value} analyzeResult={analyzeResult}/>
+        <Output
+          editorRef={editorRef}
+          language={language}
+          value={value}
+          analyzeResult={analyzeResult}
+        />
       </div>
     </div>
   );
