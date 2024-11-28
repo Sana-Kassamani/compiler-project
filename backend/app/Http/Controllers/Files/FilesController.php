@@ -56,6 +56,7 @@ class FilesController extends Controller
         ],200); 
     }
     public function get_collaborators($id){
+        $user = auth()->user();
         if(!$id)
         {
             return response()->json([
@@ -67,6 +68,11 @@ class FilesController extends Controller
                         -> join('users as u','c.collaborator_id','=','u.id')
                         ->where('c.file_id','=',$id)
                         -> get();
+        $owner=DB::table('files as f')
+                        -> join('users as u','f.owner_id','=','u.id')
+                        ->where('f.id','=',$id)
+                        ->where('f.owner_id','!=',$user->id)
+                        -> get();
         if(!$collaborators)
         {
             return response()->json([
@@ -76,7 +82,8 @@ class FilesController extends Controller
         }
         return response()->json([
             "message"=>"Collaborators retrieved successfully",
-            "collaborators"=> $collaborators
+            "collaborators"=> $collaborators,
+            "owner"=>$owner
         ],200);
 
     }

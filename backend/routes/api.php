@@ -12,10 +12,7 @@ use App\Http\Controllers\AiController;
 Route::post('register', [JWTAuthController::class, 'register']);
 Route::post('login', [JWTAuthController::class, 'login']);
 Route::get('unauthorized', [JWTAuthController::class, 'unauthorized'])->name("unauthorized");
-Route::post('/invite', [EmailController::class, 'invite']);
-Route::get('/accept/{id}', [EmailController::class, 'accept']);
-Route::post('/debug', [AiController::class, 'debug']);
-Route::post('/analyze', [AiController::class, 'analyze']);
+
 
 
 Route::middleware(JWTMiddleware::class)->group(function () {
@@ -28,6 +25,10 @@ Route::middleware(JWTMiddleware::class)->group(function () {
         Route::post("/save", [FilesController::class, "save_file"]);
         Route::delete("/{id}", [FilesController::class, "delete_file"]);
       });
+      Route::post('/invite', [EmailController::class, 'invite']);
+      Route::get('/accept/{id}', [EmailController::class, 'accept']);
+      Route::post('/debug', [AiController::class, 'debug']);
+      Route::post('/analyze', [AiController::class, 'analyze']);
       
 });
 

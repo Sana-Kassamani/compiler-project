@@ -57,22 +57,28 @@ const SideBar = () => {
           ))}
         </div>
       </div>
-      <div className="contributors">
-        <h2>Contributors</h2>
-        <div className="avatars">
-          {/* {console.log(contributors)} */}
-          {/* {contributors.owner.length > 0 &&
-            contributors.owner?.map((c, index) => (
-              <h4 key={index}>{c.username} Owner</h4>
-            ))} */}
-          {contributors?.map((c, index) => (
-            <h4 key={index}>
-              {c.username} {c.collaborator_type}
-            </h4>
-          ))}
-        </div>
-      </div>
-
+      {contributors && (
+        <>
+          <h2>Contributors</h2>
+          <div className="contributors">
+            <div className="avatars">
+              {console.log("In sidebar, contributor are ", contributors)}
+              {contributors.owner?.map((c, index) => (
+                <h4 key={index}>{c.username} : owner</h4>
+              ))}
+              {(!contributors.collaborators ||
+                contributors.collaborators.length == 0) && (
+                <h5>No contributors</h5>
+              )}
+              {contributors.collaborators?.map((c, index) => (
+                <h4 key={index}>
+                  {c.username} : {c.collaborator_type}
+                </h4>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
       {openCreateFileDialog && (
         <CreateFileDialog onClose={closeFileDialog} onCreate={createNewFile} />
       )}
