@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Files;
 
+use App\Events\CodeUpdated;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -144,7 +145,7 @@ class FilesController extends Controller
     // save new file path in db
     $user_file->path=$new_path;
     $user_file->save();
-    $user_file->content=Storage::get($user_file->path);
+    $user_file->content=Storage::get($user_file->path);    
     return response()->json([
         "message"=>"File saved successfully",
         "user_file"=> $user_file

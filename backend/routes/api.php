@@ -1,4 +1,5 @@
 <?php
+use App\Events\CodeUpdated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\JWTAuthController;
@@ -29,7 +30,6 @@ Route::middleware(JWTMiddleware::class)->group(function () {
       });
       
 });
-Route::post('/document/update', [DocumentController::class, 'update']);
 
 // Route::get('user', [JWTAuthController::class, 'getUser'])->middleware(JWTMiddleware::class);
 // Route::post('logout', [JWTAuthController::class, 'logout'])->middleware(JWTMiddleware::class);

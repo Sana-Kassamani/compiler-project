@@ -13,8 +13,8 @@ import SideBar from "../components/SideBar";
 import { fileContext } from "../context/fileContext";
 import { request } from "../utils/request";
 import Pusher from "pusher-js";
-import echo from "../config/echo";
 import axios from "axios";
+import socket from "../config/socket";
 
 const CodeEditorWindow = () => {
   const { selectedFile, list, saveFile, getFiles, getContributors } =
@@ -29,13 +29,27 @@ const CodeEditorWindow = () => {
   const [theme, setTheme] = useState({ value: "active4d", label: "Active4D" });
   const navigate = useNavigate();
   // localStorage.setItem("editorTheme", JSON.stringify(theme));
-  // handle value in the editor
-  const handleEditorChange = (value) => {
-    setValue(value);
-    broadcastChange(value);
-    console.log(value, typeof value);
-  };
 
+  useEffect(() => { 
+    const currentFile = list[selectedFile]; 
+    if (currentFile) { setValue(currentFile.content); } 
+  }, [selectedFile]); 
+  
+  useEffect(() => { 
+    if (selectedFile !== null) { 
+      socket.on('code.update', (data) => { 
+        setValue(data.code); }); 
+        socket.on('connect_error', (err) => { 
+          console.log('Socket.IO error:', err); 
+        }); 
+      } 
+    }, [selectedFile]); 
+    
+  const handleEditorChange = (value) => { 
+    setValue(value); 
+    socket.emit('code.update', { code: value, fileId: list[selectedFile].id }); 
+  };
+  
   // set focus on tthe compiler
   const onMount = (editor) => {
     editorRef.current = editor;
@@ -90,6 +104,7 @@ const CodeEditorWindow = () => {
       console.log(error.response.data.message);
     }
   };
+
   const handleSave = async () => {
     const blob = new Blob([value], { type: "text/plain" });
     const file = new File([blob], list[selectedFile].filename, {
@@ -102,6 +117,7 @@ const CodeEditorWindow = () => {
     form.append("file", file);
     saveFile(form);
   };
+
   useEffect(() => {
     const currentFile = list[selectedFile];
     console.log(currentFile, typeof currentFile);
@@ -136,45 +152,6 @@ const CodeEditorWindow = () => {
       );
     }
   }, []);
-
-  useEffect(() => {
-    // Enable pusher logging - don't include this in production
-    // Pusher.logToConsole = true;
-
-    const pusher = new Pusher("38a7faf7510acaec457c", {
-      cluster: "ap2",
-    });
-
-    const channel = pusher.subscribe("document");
-    // channel.bind("code", function (data) {
-    //   setValue(data);
-    // });
-    channel.bind("DocumentUpdated", (data) => {
-      console.log("Received update from Pusher:", data.content, typeof content);
-      //   setValue(data);
-      console.log("Socket is", echo.socketId());
-      console.log(data);
-      //   if (data.content !== value) {
-      //     setValue(data.content);
-      //   }
-      if (data.socket_id !== echo.socketId()) {
-        console.log("socket id is:", data.socket_id);
-        console.log("Received update from Pusher:", data.content);
-        setValue(data.content);
-      } else {
-        console.log("Ignoring event from the current user.");
-      }
-    });
-  }, []);
-  const broadcastChange = async (updatedContent) => {
-    console.log("Broadcasting change:", updatedContent);
-    console.log("------------", axios.defaults);
-    axios.defaults.headers.common["X-Socket-Id"] = echo.socketId();
-    await axios.post("http://127.0.0.1:8000/api/document/update", {
-      content: updatedContent,
-      socket_id: echo.socketId(),
-    });
-  };
 
   return (
     <div className="window">

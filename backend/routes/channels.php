@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\ChannelController;
 
 // Define the channel to listen for file updates, and delegate to the controller
-Broadcast::channel('file.{fileId}', [ChannelController::class, 'authorizeFileAccess']);
+//Broadcast::channel('file.{fileId}', [ChannelController::class, 'authorizeFileAccess']);
 
 
 
