@@ -22,6 +22,7 @@ Route::middleware(JWTMiddleware::class)->group(function () {
     Route::get('logout', [JWTAuthController::class, 'logout']);
     Route::prefix("/file")->group(function() {
         Route::get("/", [FilesController::class, "get_all_files"]);
+        Route::get("/{id}", [FilesController::class, "get_collaborators"]);
         Route::post("/", [FilesController::class, "create_file"]);
         Route::post("/save", [FilesController::class, "save_file"]);
         Route::delete("/{id}", [FilesController::class, "delete_file"]);

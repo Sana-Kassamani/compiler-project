@@ -7,13 +7,8 @@ export const fileContext = createContext();
 
 const FilesProvider = ({ children }) => {
   const [files, setFiles] = useState([]);
+  const [contributors, setContributors] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
-  //   const [filtered, setFiltered] = useState([]);
-
-  //   const handdleFilters = (filters) => {
-  //     // Logic
-  //     setFiltered();
-  //   };
 
   const getFiles = async () => {
     try {
@@ -52,10 +47,6 @@ const FilesProvider = ({ children }) => {
       console.log(error.response.data.message);
     }
   };
-  //   const getFileContent = (id) => {
-  //     {
-
-  //     }
 
   const saveFile = async (form) => {
     try {
@@ -88,6 +79,22 @@ const FilesProvider = ({ children }) => {
     }
   };
 
+  const getContributors = async (fileId) => {
+    try {
+      const response = await request({
+        route: `/file/${fileId}`,
+      });
+      console.log(response);
+      if (response.status === 200) {
+        setContributors(response.data.collaborators);
+        console.log("collaborators are", response.data.collaborators);
+      } else {
+        console.log(response.data.message);
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
   //   const deleteFile = (id) => {
   //     axios.delete("http://127.0.0.1:8000/api/courses").then(({ data }) => {
   //       setCourses(data.courses);
@@ -99,10 +106,13 @@ const FilesProvider = ({ children }) => {
       value={{
         selectedFile: selectedFile,
         list: files,
+        contributors: contributors,
         getFiles,
         setSelectedFile,
         createFile,
         saveFile,
+        getContributors,
+
         // editCourse,
         // deleteCourse,
       }}

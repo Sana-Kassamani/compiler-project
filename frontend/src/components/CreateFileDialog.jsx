@@ -16,7 +16,7 @@ const CreateFileDialog = ({ onClose, onCreate }) => {
       setError("File name is required!");
       return;
     }
-    onCreate({ fileName, language });
+    onCreate(fileName, language);
   };
 
   return (

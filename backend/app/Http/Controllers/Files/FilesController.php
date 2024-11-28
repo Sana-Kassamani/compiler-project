@@ -54,7 +54,29 @@ class FilesController extends Controller
             "file"=> $new_file
         ],200); 
     }
-    public function get_collaborators(){
+    public function get_collaborators($id){
+        if(!$id)
+        {
+            return response()->json([
+                "message"=> "No selected file"
+            ],400);
+        }
+        //SELECT * from collaborations as c INNER join users as u on c.collaborator_id = u.id where file_id = 13;
+        $collaborators = DB::table('collaborations as c')
+                        -> join('users as u','c.collaborator_id','=','u.id')
+                        ->where('c.file_id','=',$id)
+                        -> get();
+        if(!$collaborators)
+        {
+            return response()->json([
+                "message"=>"No collaborators on this file"
+            ],200); 
+
+        }
+        return response()->json([
+            "message"=>"Collaborators retrieved successfully",
+            "collaborators"=> $collaborators
+        ],200);
 
     }
    public function get_all_files(){
